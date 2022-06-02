@@ -1,4 +1,4 @@
-package com.oriente.compiler;
+package com.oriente.compiler.base;
 
 import java.util.Set;
 
@@ -10,17 +10,17 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
-public abstract class AbsClassProcessor extends AbstractProcessor {
-    public Messager messager;
-    public Filer filer;
-    public Elements elementUtils;
+public abstract class AbsProcessor extends AbstractProcessor {
+    public Messager mMessager;
+    public Filer mFiler;
+    public Elements mMlementUtils;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        messager = processingEnv.getMessager();
-        filer = processingEnv.getFiler();
-        elementUtils = processingEnv.getElementUtils();
+        mMessager = processingEnv.getMessager();
+        mFiler = processingEnv.getFiler();
+        mMlementUtils = processingEnv.getElementUtils();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.oriente.compiler;
 
 import com.oriente.anno.BindView;
+import com.oriente.compiler.base.HandlerProcess;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -80,7 +81,7 @@ public class BindViewProcessor extends HandlerProcess.Handler {
                 //生成Java类
                 try {
 
-                    JavaFileObject sourceFile = mProcessor.filer.createSourceFile(packageName + "." + newName);
+                    JavaFileObject sourceFile = mProcessor.mFiler.createSourceFile(packageName + "." + newName);
                     writer = sourceFile.openWriter();
 
                     StringBuffer stringBuffer = new StringBuffer();
@@ -129,7 +130,7 @@ public class BindViewProcessor extends HandlerProcess.Handler {
      */
     public String getPackageName(VariableElement variableElement) {
         TypeElement typeElement = (TypeElement) variableElement.getEnclosingElement();
-        PackageElement packageOf = mHandlerProcess.elementUtils.getPackageOf(typeElement);
+        PackageElement packageOf = mHandlerProcess.mMlementUtils.getPackageOf(typeElement);
         return packageOf.getQualifiedName().toString();
 
     }

@@ -1,6 +1,8 @@
-package com.oriente.compiler;
+package com.oriente.compiler.base;
 
 import com.google.auto.service.AutoService;
+import com.oriente.compiler.BindViewProcessor;
+import com.oriente.compiler.RouteProcessor;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;
@@ -17,7 +19,7 @@ import javax.lang.model.element.TypeElement;
 
 
 @AutoService(Processor.class)
-public class HandlerProcess extends AbsClassProcessor {
+public class HandlerProcess extends AbsProcessor {
     private List<Handler> mHandlers;
 
     @Override
@@ -25,7 +27,7 @@ public class HandlerProcess extends AbsClassProcessor {
         super.init(processingEnv);
         mHandlers = new LinkedList<>();
         mHandlers.add(new BindViewProcessor(this));
-        mHandlers.add(new BindViewProcessor2(this));
+        mHandlers.add(new RouteProcessor(this));
         for (Handler mHandler : mHandlers) {
             mHandler.onInit();
         }

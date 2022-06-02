@@ -1,71 +1,52 @@
 package com.oriente.compiler;
 
-import com.google.auto.service.AutoService;
 import com.oriente.anno.BindView;
-import com.oriente.anno.Route;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.Elements;
-import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 
-@AutoService(Processor.class)
-public class BindViewProcessor extends AbstractProcessor {
-    Messager mMessager;
-    Elements mElementUtils;
-    Filer filer;
+public class BindViewProcessor extends HandlerProcess.Handler {
+
+    public HandlerProcess mHandlerProcess;
+
+    public BindViewProcessor(HandlerProcess mProcessor) {
+        super(mProcessor);
+        this.mHandlerProcess = mProcessor;
+    }
+
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-        filer = processingEnv.getFiler();
-        mMessager = processingEnv.getMessager();
-        mMessager.printMessage(Diagnostic.Kind.NOTE, "init");
-        mElementUtils = processingEnv.getElementUtils();
+    public void onInit() {
+
     }
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        Set<String> set = new HashSet<>();
-        set.add(BindView.class.getCanonicalName());
-        set.add(Route.class.getCanonicalName());
-        return set;
+    public String[] getSupportedAnnotationTypes() {
+        return new String[]{BindView.class.getCanonicalName()};
     }
 
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return processingEnv.getSourceVersion();
-    }
 
+    /**
+     * Element   对应的是    PackageElement-包, TypeElement-类  VariableElement-属性  ExecutableElement-方法
+     */
     @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        mMessager.printMessage(Diagnostic.Kind.NOTE, "process...");
-        //查找到所有的类中被BindView所标记的内容（成员变量）
-        Set<? extends Element> elementsAnnotatedWith = roundEnv.getElementsAnnotatedWith(BindView.class);
-        /**
-         * Element   对应的是    PackageElement-包, TypeElement-类  VariableElement-属性  ExecutableElement-方法
-         */
+    public boolean onProcess(TypeElement ele, RoundEnvironment env) {
+        Set<? extends Element> elementsAnnotatedWith = env.getElementsAnnotatedWith(BindView.class);
+
         //将每个Activity里面的成员变量单独找出来
         Map<String, List<VariableElement>> map = new HashMap<>();
 
@@ -99,7 +80,7 @@ public class BindViewProcessor extends AbstractProcessor {
                 //生成Java类
                 try {
 
-                    JavaFileObject sourceFile = filer.createSourceFile(packageName + "." + newName);
+                    JavaFileObject sourceFile = mProcessor.filer.createSourceFile(packageName + "." + newName);
                     writer = sourceFile.openWriter();
 
                     StringBuffer stringBuffer = new StringBuffer();
@@ -134,12 +115,11 @@ public class BindViewProcessor extends AbstractProcessor {
                         }
                     }
                 }
-
-
             }
         }
         return true;
     }
+
 
     /**
      * 获取包名
@@ -149,7 +129,7 @@ public class BindViewProcessor extends AbstractProcessor {
      */
     public String getPackageName(VariableElement variableElement) {
         TypeElement typeElement = (TypeElement) variableElement.getEnclosingElement();
-        PackageElement packageOf = processingEnv.getElementUtils().getPackageOf(typeElement);
+        PackageElement packageOf = mHandlerProcess.elementUtils.getPackageOf(typeElement);
         return packageOf.getQualifiedName().toString();
 
     }

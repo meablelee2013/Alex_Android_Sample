@@ -2,6 +2,7 @@ package com.oriente.compiler.base;
 
 import com.google.auto.service.AutoService;
 import com.oriente.compiler.BindViewProcessor;
+import com.oriente.compiler.PrintProcessor;
 import com.oriente.compiler.RouteProcessor;
 
 import java.security.InvalidParameterException;
@@ -28,6 +29,7 @@ public class HandlerProcess extends AbsProcessor {
         mHandlers = new LinkedList<>();
         mHandlers.add(new BindViewProcessor(this));
         mHandlers.add(new RouteProcessor(this));
+        mHandlers.add(new PrintProcessor(this));
         for (Handler mHandler : mHandlers) {
             mHandler.onInit();
         }

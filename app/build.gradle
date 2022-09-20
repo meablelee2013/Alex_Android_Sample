@@ -11,14 +11,34 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField "boolean", "active", "false"
+            debuggable true
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            buildConfigField "boolean", "active", "false"
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        staging {
+            initWith(release)
+            matchingFallbacks = ['release', 'debug']
+            debuggable true
+            buildConfigField "boolean", "active", "true"
+        }
+        pre {
+            initWith(release)
+            matchingFallbacks = ['release', 'debug']
+            debuggable false
+            buildConfigField "boolean", "active", "true"
         }
     }
     compileOptions {
@@ -42,7 +62,6 @@ dependencies {
 
     implementation project(path: ':anno')
     annotationProcessor project(path: ':compiler')
-
 
 
     testImplementation 'junit:junit:4.13.2'

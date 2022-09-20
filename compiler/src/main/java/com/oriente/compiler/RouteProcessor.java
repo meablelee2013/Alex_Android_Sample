@@ -46,21 +46,21 @@ public class RouteProcessor extends HandlerProcess.Handler {
             stringBuffer.append("package " + packageName + ";\n")
                     .append("import java.util.LinkedList;\n")
                     .append("import com.oriente.anno.RouteInfo;")
-                    .append("import java.util.List;\n")
+                    .append("import java.util.List;\n\n")
                     .append("public class RouterTable{\n")
-                    .append("    public static List<RouteInfo> sRouterTable = new LinkedList<>();\n")
-                    .append("    static {\n");
+                    .append("\tpublic static List<RouteInfo> sRouterTable = new LinkedList<>();\n")
+                    .append("\n\tstatic {\n");
 
             for (Element element : elementsAnnotatedWith) {
 
                 TypeElement typeElement = (TypeElement) element;
                 Route annotation = typeElement.getAnnotation(Route.class);
                 String annotationName = annotation.name();
-                stringBuffer.append("  sRouterTable.add(new RouteInfo(").append('"').append(annotationName).append('"').append("));\n");
+                stringBuffer.append("\t\tsRouterTable.add(new RouteInfo(").append('"').append(annotationName).append('"').append("));\n");
 
             }
 
-            stringBuffer.append("}\n").append("}\n");
+            stringBuffer.append("\t}\n").append("}\n");
 
             writer.write(stringBuffer.toString());
         } catch (IOException e) {
@@ -90,6 +90,6 @@ public class RouteProcessor extends HandlerProcess.Handler {
     }
 
     private String getPackageName(Element typeElement) {
-        return mProcessor.mMlementUtils.getPackageOf(typeElement).getQualifiedName().toString();
+        return mProcessor.mElementUtils.getPackageOf(typeElement).getQualifiedName().toString();
     }
 }

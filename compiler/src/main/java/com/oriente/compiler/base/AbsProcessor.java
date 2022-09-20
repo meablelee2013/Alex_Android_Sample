@@ -13,14 +13,14 @@ import javax.lang.model.util.Elements;
 public abstract class AbsProcessor extends AbstractProcessor {
     public Messager mMessager;
     public Filer mFiler;
-    public Elements mMlementUtils;
+    public Elements mElementUtils;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         mMessager = processingEnv.getMessager();
         mFiler = processingEnv.getFiler();
-        mMlementUtils = processingEnv.getElementUtils();
+        mElementUtils = processingEnv.getElementUtils();
     }
 
     @Override

@@ -92,13 +92,13 @@ public class BindViewProcessor extends HandlerProcess.Handler {
                     //通过接口 可以减少反射
                     stringBuffer.append("public class " + newName + " implements IButterKnife<" + packageName + "." + activityName + ">{\n");
 
-                    stringBuffer.append("public void bind(" + packageName + "." + activityName + " target){\n");
+                    stringBuffer.append("\n\tpublic void bind(" + packageName + "." + activityName + " target){\n");
                     for (VariableElement variableElement : variableElements) {
                         String variableName = variableElement.getSimpleName().toString();
 
                         //获取到上面注解所持有的value
                         int resId = variableElement.getAnnotation(BindView.class).value();
-                        stringBuffer.append("target." + variableName + "=target.findViewById (" + resId + ");\n");
+                        stringBuffer.append("\t\ttarget." + variableName + " = target.findViewById (" + resId + ");\n");
 
 
                     }
@@ -130,7 +130,7 @@ public class BindViewProcessor extends HandlerProcess.Handler {
      */
     public String getPackageName(VariableElement variableElement) {
         TypeElement typeElement = (TypeElement) variableElement.getEnclosingElement();
-        PackageElement packageOf = mHandlerProcess.mMlementUtils.getPackageOf(typeElement);
+        PackageElement packageOf = mHandlerProcess.mElementUtils.getPackageOf(typeElement);
         return packageOf.getQualifiedName().toString();
 
     }

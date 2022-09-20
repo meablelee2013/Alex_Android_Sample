@@ -25,11 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        text2.setText("aaaaa");
 
+        StringBuffer sb = new StringBuffer();
         List<RouteInfo> sRouterTable = RouterTable.sRouterTable;
         for (RouteInfo routeInfo : sRouterTable) {
-            Log.d("alex", routeInfo.name);
+            sb.append(routeInfo.name).append("\n");
         }
+        text2.setText(sb.toString());
     }
 }

@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        // 本地仓库
+        mavenLocal()
+        maven {
+            url 'https://jitpack.io'
+            allowInsecureProtocol = true
+        }
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenLocal()
+
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "aptSample"
+include ':anno'
+include ':app'
+include ':compiler'

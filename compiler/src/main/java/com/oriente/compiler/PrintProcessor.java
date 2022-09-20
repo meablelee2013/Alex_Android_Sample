@@ -40,13 +40,10 @@ public class PrintProcessor extends HandlerProcess.Handler {
                 mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element packageName is " + getPackageName(e));
                 TypeElement typeElement = (TypeElement) e;
                 String className = typeElement.getSimpleName().toString();
-                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element className " + className);
                 String fullClassName = typeElement.getQualifiedName().toString();
-                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element fullClassName " + fullClassName);
-
                 PrintInfo printInfo = typeElement.getAnnotation(PrintInfo.class);
-                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element value is  " + printInfo.value());
-                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element active value is  " + printInfo.active());
+                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element className " + className + "---element fullClassName=" + fullClassName);
+                mHandlerProcess.mMessager.printMessage(Diagnostic.Kind.NOTE, "element value()=  " + printInfo.value() + "---element active()=" + printInfo.active());
             }
         }
         return true;

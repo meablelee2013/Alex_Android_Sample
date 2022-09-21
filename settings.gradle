@@ -1,22 +1,22 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     repositories {
-        // 本地仓库
-        mavenLocal()
-        maven {
-            url 'https://jitpack.io'
-            allowInsecureProtocol = true
-        }
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            url("buildSrc")
+        }
+        maven{
+            //maven仓库的地址
+            url uri('plugins')
+        }
     }
 }
-
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
-        mavenLocal()
-
         google()
         mavenCentral()
     }
@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Alex_Android_Sample"
 include ':app'
+include ':customplugin'

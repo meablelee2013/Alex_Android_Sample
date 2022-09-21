@@ -1,0 +1,47 @@
+apply plugin: "java"
+apply plugin: 'java-gradle-plugin'
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+//Gralde 7.0以上选择下面发布到本地
+apply plugin: 'maven-publish'
+publishing {
+    publications{
+        maven(MavenPublication) {
+            groupId "com.example.custom"
+            artifactId 'CustomPlugin'
+            version "1.0.0"
+            //如果是war包填写components.web，如果是jar包填写components.java
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = "../plugins"
+        }
+    }
+}
+//Gralde 7.0以下选择下面发布到本地
+//打包到本地或者远程maven库
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            //这个就是配置这个自定义插件的classpath
+//            //例如根项目依赖：classpath "com.example.custom:CustomPlugin:1.0.0"
+//            pom.groupId = 'com.example.custom'
+//            pom.artifactId = 'CustomPlugin'
+//            pom.version = '1.0.0'
+//            //提交到远程服务器
+//            // repository(url:"服务器地址"){
+//            //    authentication(userName:'admin',password:'123456')
+//            // }
+//            //提交本地maven地址：../plugins
+//            repository(url: uri('../plugins'))
+//        }
+//    }
+//}

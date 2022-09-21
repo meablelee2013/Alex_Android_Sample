@@ -1,21 +1,12 @@
-import org.gradle.api.initialization.resolve.RepositoriesMode
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral()
-        maven {
-            url("buildSrc")
-        }
-        maven{
-            //maven仓库的地址
-            url uri('plugins')
-        }
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -24,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Alex_Android_Sample"
 include ':app'
-include ':customplugin'

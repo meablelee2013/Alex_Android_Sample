@@ -23,6 +23,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "aptSample"
-include ':anno'
 include ':app'
-include ':compiler'

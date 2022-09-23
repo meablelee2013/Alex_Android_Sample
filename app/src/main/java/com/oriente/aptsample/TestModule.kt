@@ -13,6 +13,9 @@ import dagger.hilt.android.components.ActivityComponent
 @InstallIn(ActivityComponent::class)
 abstract class TestModule {
 
+
     @Binds
-    abstract fun bindTestInterface(testImpl: TestImpl):TestInterface
+    abstract fun bindTestInterface(testImpl: TestImpl): TestInterface
+
+
 }

@@ -31,5 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发送通知" />
+    <Button
+        android:id="@+id/sendMessageAgainBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="再次发送通知" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

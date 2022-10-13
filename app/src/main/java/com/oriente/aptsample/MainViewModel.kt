@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel(var activity: Activity) : ViewModel() {
 
-    private val _name = MutableLiveData("alex")
+//    private val _name = MutableLiveData("alex")
 
-    val name: LiveData<String> = _name
+    var name: MutableLiveData<String> = MutableLiveData("alex")
 
-    var price: LiveData<Int> = MutableLiveData(119)
+    var price: MutableLiveData<Int> = MutableLiveData(119)
 
     fun next() {
         activity.startActivity(Intent(activity, SecondActivity::class.java))

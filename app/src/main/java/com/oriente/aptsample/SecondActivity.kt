@@ -16,8 +16,13 @@ class SecondActivity : FragmentActivity() {
             .observe(this, Observer {
                 Log.d("alex", "second activity value change: ${it}")
             })
+
         findViewById<Button>(R.id.sendMessageBtn).setOnClickListener {
             LiveDataBus.get().with("message").value = "from secondActivity"
+        }
+
+        findViewById<Button>(R.id.sendMessageAgainBtn).setOnClickListener {
+            LiveDataBus.get().with("message").value = "from secondActivity again"
         }
     }
 }

@@ -19,6 +19,15 @@ class MainActivity : FragmentActivity() {
                 Log.d(TAG, "first activity value change: ${it}")
             })
 
+        LiveDataBus2.get().with("message",String::class.java)
+            .observe(this,Observer{
+                Log.d(TAG, "livedatabus2 first activity value change: ${it}")
+            })
 
+//        LiveDataBus.get().with("message",String::class.java)
+//            .observeForever(Observer {
+//                Log.d(TAG, "first activity value change --- observeForever: ${it}")
+//                mainViewModel.name.postValue("alex---")
+//            })
     }
 }

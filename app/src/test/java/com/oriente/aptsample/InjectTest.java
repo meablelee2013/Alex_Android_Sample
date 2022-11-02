@@ -3,6 +3,7 @@ package com.oriente.aptsample;
 
 public class InjectTest {
 
+
     public static void main(String[] args) throws InterruptedException {
 //        long l = System.currentTimeMillis();
         Thread.sleep(100);

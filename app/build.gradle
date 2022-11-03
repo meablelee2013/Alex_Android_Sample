@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.example.asm' /* 此处的id 取的是META-INF.gradle-plugins 文件夹下的文件名（去掉.properties后缀）*/
 }
 
 android {

@@ -1,9 +1,30 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '7.2.1' apply false
-    id 'com.android.library' version '7.2.1' apply false
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            //maven仓库的地址
+            url uri('plugins')
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "com.example.asm:AsmPlugin:1.0.0" /*此外的是取的plugin的真实groupId以及artifactId以及version  这个id就是对应的插件项目中配置文件的前缀名*/
+    }
 }
 
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            //maven仓库的地址
+            url uri('plugins')
+        }
+    }
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

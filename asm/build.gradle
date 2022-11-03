@@ -1,0 +1,33 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.ow2.asm:asm:7.1'
+    implementation 'org.ow2.asm:asm-commons:7.1'
+    implementation 'com.android.tools.build:gradle:3.5.3'
+
+}
+//Gradle 7.0以上选择下面发布到本地
+apply plugin: 'maven-publish'
+
+publishing {
+    publications{
+        maven(MavenPublication) {
+            groupId "com.example.asm"
+            artifactId 'AsmPlugin'
+            version "1.0.0"
+            //如果是war包填写components.web，如果是jar包填写components.java
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = "../plugins"
+        }
+    }
+}

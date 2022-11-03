@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.example.asm",
+    "module": "AsmPlugin",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "AsmPlugin-1.0.0.jar",
+          "url": "AsmPlugin-1.0.0.jar",
+          "size": 9992,
+          "sha512": "782dd5c0decf2e6113f7a73695cb32026d555ee73264e78ff5e2a59d3fbcf79ad4729845352007a34c8529d0891797ba312a0fef9eed42785519369cfbf6481b",
+          "sha256": "91d832022e939d98957f48b47a0cbc87e17933d95c4ab0768a23345500887a42",
+          "sha1": "6cf3d4c3711d29d3f4c5e6319cf8e052d9f5aa9f",
+          "md5": "317a044e2244aef1379f7156386c71de"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "7.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "7.1"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "3.5.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "AsmPlugin-1.0.0.jar",
+          "url": "AsmPlugin-1.0.0.jar",
+          "size": 9992,
+          "sha512": "782dd5c0decf2e6113f7a73695cb32026d555ee73264e78ff5e2a59d3fbcf79ad4729845352007a34c8529d0891797ba312a0fef9eed42785519369cfbf6481b",
+          "sha256": "91d832022e939d98957f48b47a0cbc87e17933d95c4ab0768a23345500887a42",
+          "sha1": "6cf3d4c3711d29d3f4c5e6319cf8e052d9f5aa9f",
+          "md5": "317a044e2244aef1379f7156386c71de"
+        }
+      ]
+    }
+  ]
+}

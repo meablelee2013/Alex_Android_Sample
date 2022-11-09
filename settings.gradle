@@ -6,6 +6,15 @@ pluginManagement {
             url 'https://jitpack.io'
             allowInsecureProtocol = true
         }
+        //download org.jetbrains.kotlin:kotlin-gradle-plugin too slow
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+
+        google()
+        jcenter()
+        mavenCentral()
+
         gradlePluginPortal()
         google()
         mavenCentral()
@@ -24,3 +33,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "aptSample"
 include ':app'
+include ':service'

@@ -1,5 +1,8 @@
 package com.oriente.aptsample.startup;
 
+import android.content.Context;
+import android.os.Looper;
+
 import com.oriente.aptsample.startup.manager.ExecutorManager;
 
 import java.util.List;
@@ -8,10 +11,21 @@ import java.util.concurrent.Executor;
 
 public abstract class AndroidStartup<T> implements Startup<T> {
 
+    protected String threadResult;
     private CountDownLatch mWaitCountDown = new CountDownLatch(getDependenciesCount());
 
     @Override
     public List<Class<? extends Startup<?>>> dependencies() {
+        return null;
+    }
+
+    @Override
+    public T create(Context context) {
+        if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
+            threadResult = "主线程";
+        } else {
+            threadResult = "子线程";
+        }
         return null;
     }
 

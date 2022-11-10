@@ -1,7 +1,7 @@
 package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
-import android.os.SystemClock;
+import android.util.Log;
 
 import com.oriente.aptsample.startup.AndroidStartup;
 import com.oriente.aptsample.startup.Startup;
@@ -20,9 +20,14 @@ public class Task3 extends AndroidStartup<Void> {
 
     @Override
     public Void create(Context context) {
-        System.out.println("Task3 学习Socket");
-        SystemClock.sleep(3000);
-        System.out.println("Task3 掌握Socket");
+        super.create(context);
+        Log.d("alex", threadResult + "---Task3 学习设计模式");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.e("alex", threadResult + "---Task3 掌握设计模式");
         return null;
     }
 
@@ -43,6 +48,6 @@ public class Task3 extends AndroidStartup<Void> {
 
     @Override
     public boolean waitOnMainThread() {
-        return false;
+        return true;
     }
 }

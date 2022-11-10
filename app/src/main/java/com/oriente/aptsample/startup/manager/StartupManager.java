@@ -19,11 +19,24 @@ public class StartupManager {
     private List<AndroidStartup<?>> startupList;
     private StartupSortStore startupSortStore;
 
-    private CountDownLatch awaitCountDownLatch = new CountDownLatch(5);
+    private CountDownLatch awaitCountDownLatch;
 
     public StartupManager(Context context, List<AndroidStartup<?>> startupList) {
         this.context = context;
         this.startupList = startupList;
+        checkNeedWaitTaskCountEnterMainPage(startupList);
+    }
+
+    private void checkNeedWaitTaskCountEnterMainPage(List<AndroidStartup<?>> startupList) {
+        int count = 0;
+        if (startupList != null) {
+            for (AndroidStartup<?> startup : startupList) {
+                if (startup.waitOnMainThread()) {
+                    count++;
+                }
+            }
+        }
+        awaitCountDownLatch = new CountDownLatch(count);
     }
 
     public StartupManager start() {
@@ -51,10 +64,10 @@ public class StartupManager {
     }
 
     public void notifyChildren(Startup<?> startup) {
-        //获取已经完成的当前任务的所有子任务
-        if (!startup.callCreateOnMainThread() && startup.waitOnMainThread()) {
+        if (startup.waitOnMainThread()) {
             awaitCountDownLatch.countDown();
         }
+        //获取已经完成的当前任务的所有子任务
         if (startupSortStore.getStartupDependenceChildrenMap().containsKey(startup.getClass())) {
             List<Class<? extends Startup>> childStartupCls = startupSortStore.getStartupDependenceChildrenMap().get(startup.getClass());
             for (Class<? extends Startup> cls : childStartupCls) {

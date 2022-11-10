@@ -1,3 +1,5 @@
+https://github.com/idisfkj/android-startup
+
 Step1:任务依赖，任务分发启动
     StartupManager 用Builder设计模式而不是用单例模式
     是因为为了在其他的场景可以复用，如果用单例，则在其他场景用时需要清空原来的数据

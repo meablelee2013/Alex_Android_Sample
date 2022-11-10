@@ -1,7 +1,7 @@
 package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
-import android.os.SystemClock;
+import android.util.Log;
 
 import com.oriente.aptsample.startup.AndroidStartup;
 import com.oriente.aptsample.startup.Startup;
@@ -20,9 +20,14 @@ public class Task2 extends AndroidStartup<Void> {
 
     @Override
     public Void create(Context context) {
-        System.out.println("Task2 学习Socket");
-        SystemClock.sleep(3000);
-        System.out.println("Task2 掌握Socket");
+        super.create(context);
+        Log.d("alex", threadResult + "---Task2 学习Socket");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.e("alex", threadResult + "---Task2 掌握Socket");
         return null;
     }
 

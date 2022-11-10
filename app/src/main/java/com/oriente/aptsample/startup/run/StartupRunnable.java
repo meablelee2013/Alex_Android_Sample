@@ -21,6 +21,7 @@ public class StartupRunnable implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Task name=" + startup.getClass().getName());
         android.os.Process.setThreadPriority(startup.getThreadPriority());
         startup.toWait();
         Object result = startup.create(context);

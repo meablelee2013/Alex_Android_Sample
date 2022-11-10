@@ -1,7 +1,7 @@
 package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
-import android.os.SystemClock;
+import android.util.Log;
 
 import com.oriente.aptsample.startup.AndroidStartup;
 import com.oriente.aptsample.startup.Startup;
@@ -12,9 +12,14 @@ public class Task1 extends AndroidStartup<String> {
 
     @Override
     public String create(Context context) {
-        System.out.println("Task1 学习Java基础");
-        SystemClock.sleep(3000);
-        System.out.println("Task1 掌握Java基础");
+        super.create(context);
+        Log.d("alex", threadResult + "---Task1 学习Java基础");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.e("alex", threadResult + "---Task1 掌握Java基础");
         return "Task1 返回数据";
     }
 

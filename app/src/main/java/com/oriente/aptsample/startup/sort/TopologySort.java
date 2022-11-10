@@ -50,14 +50,22 @@ public class TopologySort {
             }
 
         }
+
         /**
          * 2.1 依次在图中删除这些顶点
          */
         List<Startup<?>> result = new ArrayList<>();
+        List<Startup<?>> mains = new ArrayList<>();
+        List<Startup<?>> threads = new ArrayList<>();
         while (!zeroDeque.isEmpty()) {
             Class<? extends Startup> cls = zeroDeque.poll();
             Startup<?> startup = startupMap.get(cls);
-            result.add(startup);
+            if (startup.waitOnMainThread()) {
+                mains.add(startup);
+            } else {
+                threads.add(startup);
+            }
+
             /**
              * 2.2 删除后再找出现在0入度的顶点
              */
@@ -72,6 +80,8 @@ public class TopologySort {
                 }
             }
         }
+        result.addAll(threads);
+        result.addAll(mains);
         return new StartupSortStore(result, startupMap, startupDependenceChildrenMap);
     }
 }

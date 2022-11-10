@@ -1,7 +1,7 @@
 package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
-import android.os.SystemClock;
+import android.util.Log;
 
 import com.oriente.aptsample.startup.AndroidStartup;
 import com.oriente.aptsample.startup.Startup;
@@ -21,9 +21,15 @@ public class Task5 extends AndroidStartup<Void> {
 
     @Override
     public Void create(Context context) {
-        System.out.println("Task5 学习OKHttp");
-        SystemClock.sleep(3000);
-        System.out.println("Task5 掌握OKHttp");
+        super.create(context);
+        Log.d("alex", threadResult + "---Task5 学习OKHttp");
+//        SystemClock.sleep(500);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.e("alex", threadResult + "---Task5 掌握OKHttp");
         return null;
     }
 

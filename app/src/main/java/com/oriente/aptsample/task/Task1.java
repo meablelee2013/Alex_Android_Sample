@@ -8,14 +8,14 @@ import com.oriente.aptsample.Startup;
 
 import java.util.List;
 
-public class Task1 extends AndroidStartup<Void> {
+public class Task1 extends AndroidStartup<String> {
 
     @Override
-    public Void create(Context context) {
+    public String create(Context context) {
         System.out.println("Task1 学习Java基础");
         SystemClock.sleep(3000);
         System.out.println("Task1 掌握Java基础");
-        return null;
+        return "Task1 返回数据";
     }
 
     /**

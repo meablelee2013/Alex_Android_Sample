@@ -11,12 +11,15 @@ import com.oriente.aptsample.startup.sort.TopologySort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class StartupManager {
 
     private Context context;
     private List<AndroidStartup<?>> startupList;
     private StartupSortStore startupSortStore;
+
+    private CountDownLatch awaitCountDownLatch = new CountDownLatch(5);
 
     public StartupManager(Context context, List<AndroidStartup<?>> startupList) {
         this.context = context;
@@ -39,8 +42,19 @@ public class StartupManager {
         return this;
     }
 
+    public void await() {
+        try {
+            awaitCountDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void notifyChildren(Startup<?> startup) {
         //获取已经完成的当前任务的所有子任务
+        if (!startup.callCreateOnMainThread() && startup.waitOnMainThread()) {
+            awaitCountDownLatch.countDown();
+        }
         if (startupSortStore.getStartupDependenceChildrenMap().containsKey(startup.getClass())) {
             List<Class<? extends Startup>> childStartupCls = startupSortStore.getStartupDependenceChildrenMap().get(startup.getClass());
             for (Class<? extends Startup> cls : childStartupCls) {

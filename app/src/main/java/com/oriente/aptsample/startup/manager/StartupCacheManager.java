@@ -1,7 +1,7 @@
-package com.oriente.aptsample.manager;
+package com.oriente.aptsample.startup.manager;
 
-import com.oriente.aptsample.Result;
-import com.oriente.aptsample.Startup;
+import com.oriente.aptsample.startup.Result;
+import com.oriente.aptsample.startup.Startup;
 
 import java.util.concurrent.ConcurrentHashMap;
 

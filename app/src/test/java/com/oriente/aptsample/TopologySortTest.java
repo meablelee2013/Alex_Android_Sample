@@ -1,14 +1,13 @@
 package com.oriente.aptsample;
 
-import android.util.Log;
-
-import com.oriente.aptsample.sort.StartupSortStore;
-import com.oriente.aptsample.sort.TopologySort;
-import com.oriente.aptsample.task.Task1;
-import com.oriente.aptsample.task.Task2;
-import com.oriente.aptsample.task.Task3;
-import com.oriente.aptsample.task.Task4;
-import com.oriente.aptsample.task.Task5;
+import com.oriente.aptsample.startup.Startup;
+import com.oriente.aptsample.startup.sort.StartupSortStore;
+import com.oriente.aptsample.startup.sort.TopologySort;
+import com.oriente.aptsample.startup.task.Task1;
+import com.oriente.aptsample.startup.task.Task2;
+import com.oriente.aptsample.startup.task.Task3;
+import com.oriente.aptsample.startup.task.Task4;
+import com.oriente.aptsample.startup.task.Task5;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package com.oriente.aptsample.sort;
+package com.oriente.aptsample.startup.sort;
 
-import com.oriente.aptsample.Startup;
+import com.oriente.aptsample.startup.Startup;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

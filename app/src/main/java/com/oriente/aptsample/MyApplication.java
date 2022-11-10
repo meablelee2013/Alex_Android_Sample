@@ -2,12 +2,12 @@ package com.oriente.aptsample;
 
 import android.app.Application;
 
-import com.oriente.aptsample.manager.StartupManager;
-import com.oriente.aptsample.task.Task1;
-import com.oriente.aptsample.task.Task2;
-import com.oriente.aptsample.task.Task3;
-import com.oriente.aptsample.task.Task4;
-import com.oriente.aptsample.task.Task5;
+import com.oriente.aptsample.startup.manager.StartupManager;
+import com.oriente.aptsample.startup.task.Task1;
+import com.oriente.aptsample.startup.task.Task2;
+import com.oriente.aptsample.startup.task.Task3;
+import com.oriente.aptsample.startup.task.Task4;
+import com.oriente.aptsample.startup.task.Task5;
 
 public class MyApplication extends Application {
     @Override

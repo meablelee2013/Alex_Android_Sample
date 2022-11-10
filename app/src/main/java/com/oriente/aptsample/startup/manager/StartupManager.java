@@ -1,14 +1,13 @@
-package com.oriente.aptsample.manager;
+package com.oriente.aptsample.startup.manager;
 
 import android.content.Context;
 import android.os.Looper;
-import android.os.StrictMode;
 
-import com.oriente.aptsample.AndroidStartup;
-import com.oriente.aptsample.Result;
-import com.oriente.aptsample.Startup;
-import com.oriente.aptsample.sort.StartupSortStore;
-import com.oriente.aptsample.sort.TopologySort;
+import com.oriente.aptsample.startup.AndroidStartup;
+import com.oriente.aptsample.startup.Startup;
+import com.oriente.aptsample.startup.run.StartupRunnable;
+import com.oriente.aptsample.startup.sort.StartupSortStore;
+import com.oriente.aptsample.startup.sort.TopologySort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +29,26 @@ public class StartupManager {
         }
         startupSortStore = TopologySort.sort(startupList);
         for (Startup<?> startup : startupSortStore.getResult()) {
-            Object result = startup.create(context);
-            StartupCacheManager.getInstance().saveInitializedComponent(startup.getClass(), new Result(result));
+            StartupRunnable startupRunnable = new StartupRunnable(context, startup, this);
+            if (startup.callCreateOnMainThread()) {
+                startupRunnable.run();
+            } else {
+                startup.executor().execute(startupRunnable);
+            }
         }
         return this;
+    }
+
+    public void notifyChildren(Startup<?> startup) {
+        //获取已经完成的当前任务的所有子任务
+        if (startupSortStore.getStartupDependenceChildrenMap().containsKey(startup.getClass())) {
+            List<Class<? extends Startup>> childStartupCls = startupSortStore.getStartupDependenceChildrenMap().get(startup.getClass());
+            for (Class<? extends Startup> cls : childStartupCls) {
+                Startup<?> childStartup = startupSortStore.getStartupMap().get(cls);
+                //父任务做完任务之后，需要通知所有依赖他的子任务可以执行任务了
+                childStartup.toNotify();
+            }
+        }
     }
 
     public static class Builder {

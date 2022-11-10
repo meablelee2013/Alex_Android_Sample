@@ -1,4 +1,4 @@
-package com.oriente.aptsample;
+package com.oriente.aptsample.startup;
 
 public class Result<T> {
     public T data;

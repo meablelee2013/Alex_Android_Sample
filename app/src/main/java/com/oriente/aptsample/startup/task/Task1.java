@@ -1,10 +1,10 @@
-package com.oriente.aptsample.task;
+package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
 import android.os.SystemClock;
 
-import com.oriente.aptsample.AndroidStartup;
-import com.oriente.aptsample.Startup;
+import com.oriente.aptsample.startup.AndroidStartup;
+import com.oriente.aptsample.startup.Startup;
 
 import java.util.List;
 
@@ -26,5 +26,15 @@ public class Task1 extends AndroidStartup<String> {
     @Override
     public List<Class<? extends Startup<?>>> dependencies() {
         return super.dependencies();
+    }
+
+    @Override
+    public boolean callCreateOnMainThread() {
+        return false;
+    }
+
+    @Override
+    public boolean waitOnMainThread() {
+        return false;
     }
 }

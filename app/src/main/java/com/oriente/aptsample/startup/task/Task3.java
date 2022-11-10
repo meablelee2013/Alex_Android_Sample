@@ -1,29 +1,28 @@
-package com.oriente.aptsample.task;
+package com.oriente.aptsample.startup.task;
 
 import android.content.Context;
 import android.os.SystemClock;
 
-import com.oriente.aptsample.AndroidStartup;
-import com.oriente.aptsample.Startup;
+import com.oriente.aptsample.startup.AndroidStartup;
+import com.oriente.aptsample.startup.Startup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task5 extends AndroidStartup<Void> {
+public class Task3 extends AndroidStartup<Void> {
 
     static List<Class<? extends Startup<?>>> depends;
 
     static {
         depends = new ArrayList<>();
-        depends.add(Task3.class);
-        depends.add(Task4.class);
+        depends.add(Task1.class);
     }
 
     @Override
     public Void create(Context context) {
-        System.out.println("Task5 学习OKHttp");
+        System.out.println("Task3 学习Socket");
         SystemClock.sleep(3000);
-        System.out.println("Task5 掌握OKHttp");
+        System.out.println("Task3 掌握Socket");
         return null;
     }
 
@@ -35,5 +34,15 @@ public class Task5 extends AndroidStartup<Void> {
     @Override
     public List<Class<? extends Startup<?>>> dependencies() {
         return depends;
+    }
+
+    @Override
+    public boolean callCreateOnMainThread() {
+        return false;
+    }
+
+    @Override
+    public boolean waitOnMainThread() {
+        return false;
     }
 }

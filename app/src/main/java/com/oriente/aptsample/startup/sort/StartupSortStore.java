@@ -1,6 +1,6 @@
-package com.oriente.aptsample.sort;
+package com.oriente.aptsample.startup.sort;
 
-import com.oriente.aptsample.Startup;
+import com.oriente.aptsample.startup.Startup;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +20,13 @@ public class StartupSortStore {
 
     public List<Startup<?>> getResult() {
         return result;
+    }
+
+    public Map<Class<? extends Startup>, Startup<?>> getStartupMap() {
+        return startupMap;
+    }
+
+    public Map<Class<? extends Startup>, List<Class<? extends Startup>>> getStartupDependenceChildrenMap() {
+        return startupDependenceChildrenMap;
     }
 }

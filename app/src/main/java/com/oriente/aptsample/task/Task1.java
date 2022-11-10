@@ -1,0 +1,30 @@
+package com.oriente.aptsample.task;
+
+import android.content.Context;
+import android.os.SystemClock;
+
+import com.oriente.aptsample.AndroidStartup;
+import com.oriente.aptsample.Startup;
+
+import java.util.List;
+
+public class Task1 extends AndroidStartup<Void> {
+
+    @Override
+    public Void create(Context context) {
+        System.out.println("Task1 学习Java基础");
+        SystemClock.sleep(3000);
+        System.out.println("Task1 掌握Java基础");
+        return null;
+    }
+
+    /**
+     * 执行此任务需要依赖哪些任务
+     *
+     * @return
+     */
+    @Override
+    public List<Class<? extends Startup<?>>> dependencies() {
+        return super.dependencies();
+    }
+}

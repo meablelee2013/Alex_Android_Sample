@@ -3,7 +3,7 @@
   "component": {
     "group": "com.example.asm",
     "module": "AsmPlugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "AsmPlugin-1.0.0.jar",
-          "url": "AsmPlugin-1.0.0.jar",
-          "size": 10104,
-          "sha512": "e79cfc0f8087c22ee26626dd590626193a22e1c0323bdb526a0e42c5b63506fba9b8b59985c577fb0921a1366ddd707e86b04b0a8415a7f47c3b1e068d6ea00b",
-          "sha256": "e5d7a75a708ae20bda8114ba90fef583031ef302161cb4a82b0466ff8b44b5fe",
-          "sha1": "ec2b0e9b8862c18f833d3d61bd520b2488583eb8",
-          "md5": "bd2041165512b5414b9959d2f3742fa6"
+          "name": "AsmPlugin-1.0.1.jar",
+          "url": "AsmPlugin-1.0.1.jar",
+          "size": 14230,
+          "sha512": "0dc38a24c644f873921abe413f15411a2f67af6c69892495d473d7c765d79674f9619d78e78873f31ac5939ac34ed84e60494c809e14cb47ae5cfdb2fcf1b2f6",
+          "sha256": "5c7b3a8782baaff0b3b87b1f4cb61f8b72b36c1b9892b8f630860041a315aedb",
+          "sha1": "a38a983ae942e8c13e752994884ecda6c5373a28",
+          "md5": "eb9102e75a66da8914abe422e85bff7a"
         }
       ]
     },
@@ -69,13 +69,13 @@
       ],
       "files": [
         {
-          "name": "AsmPlugin-1.0.0.jar",
-          "url": "AsmPlugin-1.0.0.jar",
-          "size": 10104,
-          "sha512": "e79cfc0f8087c22ee26626dd590626193a22e1c0323bdb526a0e42c5b63506fba9b8b59985c577fb0921a1366ddd707e86b04b0a8415a7f47c3b1e068d6ea00b",
-          "sha256": "e5d7a75a708ae20bda8114ba90fef583031ef302161cb4a82b0466ff8b44b5fe",
-          "sha1": "ec2b0e9b8862c18f833d3d61bd520b2488583eb8",
-          "md5": "bd2041165512b5414b9959d2f3742fa6"
+          "name": "AsmPlugin-1.0.1.jar",
+          "url": "AsmPlugin-1.0.1.jar",
+          "size": 14230,
+          "sha512": "0dc38a24c644f873921abe413f15411a2f67af6c69892495d473d7c765d79674f9619d78e78873f31ac5939ac34ed84e60494c809e14cb47ae5cfdb2fcf1b2f6",
+          "sha256": "5c7b3a8782baaff0b3b87b1f4cb61f8b72b36c1b9892b8f630860041a315aedb",
+          "sha1": "a38a983ae942e8c13e752994884ecda6c5373a28",
+          "md5": "eb9102e75a66da8914abe422e85bff7a"
         }
       ]
     }

@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
-        classpath "com.example.asm:AsmPlugin:1.0.0" /*此外的是取的plugin的真实groupId以及artifactId以及version  这个id就是对应的插件项目中配置文件的前缀名*/
+        classpath "com.example.asm:AsmPlugin:1.0.1" /*此外的是取的plugin的真实groupId以及artifactId以及version  这个id就是对应的插件项目中配置文件的前缀名*/
     }
 }
 

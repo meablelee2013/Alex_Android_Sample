@@ -1,41 +1,29 @@
 package com.example.asm
 
-import com.android.build.api.transform.Context
-import com.android.build.api.transform.DirectoryInput
-import com.android.build.api.transform.Format
-import com.android.build.api.transform.JarInput
-import com.android.build.api.transform.QualifiedContent
-import com.android.build.api.transform.Transform
-import com.android.build.api.transform.TransformException
-import com.android.build.api.transform.TransformInput
-import com.android.build.api.transform.TransformInvocation
-import com.android.build.api.transform.TransformOutputProvider
+import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
-import org.apache.commons.io.IOUtils
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes
 
 import java.util.function.Consumer
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
-import java.util.jar.JarOutputStream
-import java.util.zip.ZipEntry
 
 class AsmPlugin extends Transform implements Plugin<Project> {
     private AsmConfigModel config
     private int api = Opcodes.ASM7
-
+    Project project;
 
     @Override
     void apply(Project project) {
-        println('apply asmplugin')
-        def android = project.extensions.getByType(AppExtension.class)
+        this.project = project;
+        println('apply asmplugin-----------------------------------')
+        //首先拿到app这个插件
+        def android = project.extensions.getByType(AppExtension)
+
         android.registerTransform(this)
         config = project.extensions.create("asConfig", AsmConfigModel.class)
 
@@ -48,72 +36,83 @@ class AsmPlugin extends Transform implements Plugin<Project> {
 
     @Override
     Set<QualifiedContent.ContentType> getInputTypes() {
+        //接受的输入类型是class
         return TransformManager.CONTENT_CLASS
     }
 
     @Override
     Set<? super QualifiedContent.Scope> getScopes() {
+        //扫描范围是全工程
         return TransformManager.SCOPE_FULL_PROJECT
     }
 
     @Override
     boolean isIncremental() {
-        return false
+        //支持增量编译 添加这个之后，除了第一次，后面的编译都能加速
+        return true
     }
+
 
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
+        project.getLogger().warn("asm plugin transform----------")
         if (!transformInvocation.isIncremental()) {
             //不是增量编译删除所有的outputProvider
-            transformInvocation.getOutputProvider().deleteAll();
+            transformInvocation.getOutputProvider().deleteAll()
         }
         // 获取输入源
-        Collection<TransformInput> inputs = transformInvocation.getInputs();
+        Collection<TransformInput> inputs = transformInvocation.getInputs()
         inputs.forEach(transformInput -> {
-            Collection<DirectoryInput> directoryInputs = transformInput.getDirectoryInputs();
-            Collection<JarInput> jarInputs = transformInput.getJarInputs();
+
+            //文件夹的输入
+            Collection<DirectoryInput> directoryInputs = transformInput.getDirectoryInputs()
+
             directoryInputs.forEach(new Consumer<DirectoryInput>() {
                 @Override
-                public void accept(DirectoryInput directoryInput) {
-                    try {
-                        // 处理输入源
-//                        handleDirectoryInput(directoryInput);
-                    } catch (IOException e) {
-                        System.out.println("handleDirectoryInput error:" + e.toString());
-                    }
+                void accept(DirectoryInput directoryInput) {
+                    scanDirectory(directoryInput.file)
                 }
-            });
+            })
+            //jar的输入
+            Collection<JarInput> jarInputs = transformInput.getJarInputs()
 
-            for (DirectoryInput directoryInput : directoryInputs) {
-                // 获取output目录
-                File dest = transformInvocation.getOutputProvider().getContentLocation(directoryInput.getName(),
-                        directoryInput.getContentTypes(),
-                        directoryInput.getScopes(),
-                        Format.DIRECTORY);
-                //这里执行字节码的注入，不操作字节码的话也要将输入路径拷贝到输出路径
-                try {
-                    FileUtils.copyDirectory(directoryInput.getFile(), dest);
-                } catch (IOException e) {
-                    System.out.println("output copy error:" + e.toString());
+            jarInputs.forEach(new Consumer<JarInput>() {
+                @Override
+                void accept(JarInput jarInput) {
+                    scanJar(jarInput.file)
                 }
-            }
-
-            for (JarInput jarInput : jarInputs) {
-                // 获取output目录
-                File dest = transformInvocation.getOutputProvider().getContentLocation(jarInput.getName(),
-                        jarInput.getContentTypes(),
-                        jarInput.getScopes(),
-                        Format.JAR);
-                //这里执行字节码的注入，不操作字节码的话也要将输入路径拷贝到输出路径
-                try {
-                    FileUtils.copyFile(jarInput.getFile(), dest);
-                } catch (IOException e) {
-                    System.out.println("output copy error:" + e.toString());
-                }
-            }
-        });
+            })
+        })
     }
 
+    private scanDirectory(File file) {
+        file.eachFileRecurse {
+            if (it.isFile()) {
+                project.logger.warn("file---" + it.absolutePath)
+            }
+        }
+    }
 
+    private void scanJar(File file) {
+        //通过jar包的file对象获取一个jar包对象
+        def jarFile = new JarFile(file)
+        try {
+            def enumeration = jarFile.entries()
+            //通过遍历获取jar包里所有的class然后打印出来，
+            while (enumeration.hasMoreElements()) {
+                def jarEntry = enumeration.nextElement()
+                def entryName = jarEntry.name
+                if (entryName.startsWith("androidx/") || entryName.startsWith("android/")) {
+                    break
+                }
+                project.logger.info("jarName is " + file.absolutePath + "---classPath---" + entryName)
+            }
+        } finally {
+            if (jarFile != null) {
+                //关闭jar包占用，我们重新上传，但是这个时候jar包已经被占用了
+                jarFile.close()
+            }
+        }
+    }
 }

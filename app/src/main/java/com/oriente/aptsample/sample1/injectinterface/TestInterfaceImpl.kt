@@ -1,9 +1,9 @@
-package com.oriente.aptsample
+package com.oriente.aptsample.sample1.injectinterface
 
 import android.util.Log
 import javax.inject.Inject
 
-class TestImpl @Inject constructor() : TestInterface {
+class TestInterfaceImpl @Inject constructor() : TestInterface {
 
     override fun doSomeThing() {
         Log.d("alex", "do something")

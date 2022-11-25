@@ -1,4 +1,4 @@
-package com.oriente.aptsample
+package com.oriente.aptsample.sample1.injectinterface
 
 import dagger.Binds
 import dagger.Module
@@ -14,8 +14,8 @@ import dagger.hilt.android.components.ActivityComponent
 abstract class TestModule {
 
 
-    @Binds
-    abstract fun bindTestInterface(testImpl: TestImpl): TestInterface
+    @Binds //注入实现类与接口   参数是实现类，返回接口
+    abstract fun bindTestInterface(testImpl: TestInterfaceImpl): TestInterface
 
 
 }

@@ -1,6 +1,7 @@
 package com.oriente.aptsample.sample1
 
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.oriente.aptsample.R
@@ -44,5 +45,10 @@ class MainActivity : AppCompatActivity() {
         Log.d("alex", "" + mOkHttpClient.callTimeoutMillis)
 
 
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        Debug.stopMethodTracing()
     }
 }

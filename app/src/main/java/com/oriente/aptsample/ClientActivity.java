@@ -20,7 +20,7 @@ public class ClientActivity extends AppCompatActivity {
 
     Button bindBtn, unbindBtn, getDataBtn;
     TextView showDataTv;
-
+    ServiceConnection serviceConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ClientActivity extends AppCompatActivity {
         showDataTv = findViewById(R.id.showData);
 
 
-        ServiceConnection serviceConnection = new ServiceConnection() {
+        serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 System.out.println("ClientActivity.onServiceConnected");
@@ -49,8 +49,7 @@ public class ClientActivity extends AppCompatActivity {
 
         bindBtn.setOnClickListener(v -> {
             Intent intent = new Intent();
-            intent.setAction("com.example.service.IMyAidlInterface");
-            intent.setPackage("com.example.service");
+            intent.setComponent(new ComponentName("com.example.service", "com.example.service.MyService"));
             bindService(intent, serviceConnection, BIND_AUTO_CREATE);
         });
         unbindBtn.setOnClickListener(v -> unbindService(serviceConnection));
@@ -65,5 +64,9 @@ public class ClientActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
 }

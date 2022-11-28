@@ -1,6 +1,7 @@
 package com.example.service;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Handle the splash screen transition.
         setContentView(R.layout.activity_main);
+//        startService(new Intent(this,MyService.class));
 
 //        findViewById(R.id.text).setOnClickListener(v -> {
 //            new Thread(new Runnable() {

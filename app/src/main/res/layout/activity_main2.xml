@@ -22,10 +22,11 @@
         android:id="@+id/getData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="unBind" />
+        android:text="getData" />
 
     <TextView
         android:id="@+id/showData"
+        android:text="init data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

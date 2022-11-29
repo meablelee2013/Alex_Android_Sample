@@ -65,8 +65,7 @@ public class LiveDataBus2 {
             StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
             if (stackTrace != null && stackTrace.length > 0) {
                 for (StackTraceElement element : stackTrace) {
-                    if ("android.arch.lifecycle.LiveData".equals(element.getClassName()) &&
-                            "observeForever".equals(element.getMethodName())) {
+                    if ("android.arch.lifecycle.LiveData".equals(element.getClassName()) && "observeForever".equals(element.getMethodName())) {
                         return true;
                     }
                 }

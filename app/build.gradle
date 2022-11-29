@@ -81,6 +81,7 @@ dependencies {
 
     // Hilt dependencies
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.databinding:databinding-runtime:7.1.2'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
 

@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="mainViewModel"
             type="com.oriente.aptsample.MainViewModel" />
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{viewModel.name}"
+            android:text="@{mainViewModel.name}"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -32,15 +32,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{viewModel.price.toString()}"
+            android:text="@{String.valueOf(mainViewModel.price.intValue())}"
             android:textAlignment="center"
             android:textSize="20sp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(view) -> mainViewModel.next()}"
             android:text="next"
-            android:onClick="@{(view) -> viewModel.next()}"
 
             />
     </androidx.appcompat.widget.LinearLayoutCompat>

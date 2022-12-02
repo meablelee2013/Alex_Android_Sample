@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="countModel"
+            name="countModel2"
             type="com.oriente.aptsample.CountViewModel" />
 
     </data>
@@ -34,7 +34,7 @@
             android:background="@color/teal_200"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{countModel.count.toString()}"
+            android:text="@{countModel2.count.toString()}"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp" />

@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.example.asm",
+    "module": "asm-plugin",
+    "version": "1.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "asm-plugin-1.0.1.jar",
+          "url": "asm-plugin-1.0.1.jar",
+          "size": 13365,
+          "sha512": "088ae9bf4d178f2352b2c53c5170af5b37b3c9e24b1cc659318bdf353ed35fab72a06e22997b0970b480001eff8b534bd955fe238786d028fd4af6181505f179",
+          "sha256": "dd42f9b723a32f8d4682611e265d304c72f2b4320c8b1d754d9f5a8e8e876882",
+          "sha1": "6858bb3a2798dbf082aadb83101bc2dea4d906cb",
+          "md5": "45a0ad0d2c6ad7afccb038fac4b538ed"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.2"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.2"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "4.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-plugin-1.0.1.jar",
+          "url": "asm-plugin-1.0.1.jar",
+          "size": 13365,
+          "sha512": "088ae9bf4d178f2352b2c53c5170af5b37b3c9e24b1cc659318bdf353ed35fab72a06e22997b0970b480001eff8b534bd955fe238786d028fd4af6181505f179",
+          "sha256": "dd42f9b723a32f8d4682611e265d304c72f2b4320c8b1d754d9f5a8e8e876882",
+          "sha1": "6858bb3a2798dbf082aadb83101bc2dea4d906cb",
+          "md5": "45a0ad0d2c6ad7afccb038fac4b538ed"
+        }
+      ]
+    }
+  ]
+}

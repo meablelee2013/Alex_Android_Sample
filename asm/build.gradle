@@ -6,9 +6,9 @@ repositories {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation 'org.ow2.asm:asm:7.1'
-    implementation 'org.ow2.asm:asm-commons:7.1'
-    implementation 'com.android.tools.build:gradle:3.5.3'
+    implementation 'org.ow2.asm:asm:9.2'
+    implementation 'org.ow2.asm:asm-commons:9.2'
+    implementation 'com.android.tools.build:gradle:4.1.1'
 
 }
 //Gradle 7.0以上选择下面发布到本地
@@ -19,7 +19,7 @@ publishing {
         maven(MavenPublication) {
             groupId "com.example.asm"
             artifactId 'asm-plugin'
-            version "1.0.0"
+            version "1.0.1"
             //如果是war包填写components.web，如果是jar包填写components.java
             from components.java
         }

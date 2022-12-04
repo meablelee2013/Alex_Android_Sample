@@ -15,11 +15,11 @@ dependencies {
 apply plugin: 'maven-publish'
 
 publishing {
-    publications{
+    publications {
         maven(MavenPublication) {
             groupId "com.example.asm"
-            artifactId 'AsmPlugin'
-            version "1.0.1"
+            artifactId 'asm-plugin'
+            version "1.0.0"
             //如果是war包填写components.web，如果是jar包填写components.java
             from components.java
         }

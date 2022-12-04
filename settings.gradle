@@ -1,3 +1,4 @@
 rootProject.name = "aptSample"
 include ':app'
 include ':asm'
+include ':annotation'

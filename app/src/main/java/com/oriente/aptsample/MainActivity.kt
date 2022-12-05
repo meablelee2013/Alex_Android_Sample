@@ -26,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         var tvState11: TextView = findViewById(R.id.tvState11)
         var tvState21: TextView = findViewById(R.id.tvState21)
 
+        //把String委托给了TextView
         var stateFlag1: String? by tvState1
         var stateFlag11: String? by tvState11
         var stateFlag21: String? by tvState21
 
+        //只改变数据 不动控件，控件自动刷新
         R.id.btn1.onClick(this) {
             thread {
                 runOnUiThread {

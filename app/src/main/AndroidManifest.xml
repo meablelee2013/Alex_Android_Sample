@@ -22,6 +22,12 @@
         <activity
             android:name=".learnkotlin.delegate.DelegateActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".coroutine.MainActivity2"
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

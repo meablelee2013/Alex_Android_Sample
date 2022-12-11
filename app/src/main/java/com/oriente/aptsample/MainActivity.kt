@@ -3,84 +3,87 @@ package com.oriente.aptsample
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.concurrent.thread
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
-operator fun TextView.provideDelegate(value: Any?, property: KProperty<*>) = object : ReadWriteProperty<Any?, String?> {
-    override fun getValue(thisRef: Any?, property: KProperty<*>): String? = text as String?
+//operator fun TextView.provideDelegate(value: Any?, property: KProperty<*>) = object : ReadWriteProperty<Any?, String?> {
+//    override fun getValue(thisRef: Any?, property: KProperty<*>): String? = text as String?
+//
+//    override fun setValue(thisRef: Any?, property: KProperty<*>, value: String?) {
+//        text = value
+//    }
+//}
 
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: String?) {
-        text = value
-    }
-}
+class MainActivity : AppCompatActivity(),CoroutineScope by MainScope() {
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState  : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var tvState1: TextView = findViewById(R.id.tvState1)
-        var tvState11: TextView = findViewById(R.id.tvState11)
-        var tvState21: TextView = findViewById(R.id.tvState21)
 
-        //把String委托给了TextView
-        var stateFlag1: String? by tvState1
-        var stateFlag11: String? by tvState11
-        var stateFlag21: String? by tvState21
+        launch {  }
 
-        //只改变数据 不动控件，控件自动刷新
-        R.id.btn1.onClick(this) {
-            thread {
-                runOnUiThread {
-                    stateFlag1 = "正在赶往1楼的过程中..."
-                    stateFlag11 = stateFlag1
-                    stateFlag21 = stateFlag11
-                }
-                Thread.sleep(10000)
-                runOnUiThread {
-                    stateFlag1 = "恭喜你，1楼到了"
-                    stateFlag11 = stateFlag1
-                    stateFlag21 = stateFlag11
-                }
 
-            }
-
-        }
-        R.id.btn11.onClick(this) {
-            thread {
-                runOnUiThread {
-                    stateFlag11 = "正在赶往11楼的过程中..."
-                    stateFlag1 = stateFlag11
-                    stateFlag21 = stateFlag1
-                }
-                Thread.sleep(10000)
-                runOnUiThread {
-                    stateFlag11 = "恭喜你，11楼到了"
-                    stateFlag1 = stateFlag11
-                    stateFlag21 = stateFlag1
-                }
-
-            }
-        }
-        R.id.btn21.onClick(this) {
-            thread {
-                runOnUiThread {
-                    stateFlag21 = "正在赶往21楼的过程中..."
-                    stateFlag1 = stateFlag21
-                    stateFlag11 = stateFlag1
-                }
-                Thread.sleep(10000)
-                runOnUiThread {
-                    stateFlag21 = "恭喜你，21楼到了"
-                    stateFlag1 = stateFlag21
-                    stateFlag11 = stateFlag1
-                }
-
-            }
-        }
+//        var tvState1: TextView = findViewById(R.id.tvState1)
+//        var tvState11: TextView = findViewById(R.id.tvState11)
+//        var tvState21: TextView = findViewById(R.id.tvState21)
+//
+//        //把String委托给了TextView
+//        var stateFlag1: String? by tvState1
+//        var stateFlag11: String? by tvState11
+//        var stateFlag21: String? by tvState21
+//
+//        //只改变数据 不动控件，控件自动刷新
+//        R.id.btn1.onClick(this) {
+//            thread {
+//                runOnUiThread {
+//                    stateFlag1 = "正在赶往1楼的过程中..."
+//                    stateFlag11 = stateFlag1
+//                    stateFlag21 = stateFlag11
+//                }
+//                Thread.sleep(10000)
+//                runOnUiThread {
+//                    stateFlag1 = "恭喜你，1楼到了"
+//                    stateFlag11 = stateFlag1
+//                    stateFlag21 = stateFlag11
+//                }
+//
+//            }
+//
+//        }
+//        R.id.btn11.onClick(this) {
+//            thread {
+//                runOnUiThread {
+//                    stateFlag11 = "正在赶往11楼的过程中..."
+//                    stateFlag1 = stateFlag11
+//                    stateFlag21 = stateFlag1
+//                }
+//                Thread.sleep(10000)
+//                runOnUiThread {
+//                    stateFlag11 = "恭喜你，11楼到了"
+//                    stateFlag1 = stateFlag11
+//                    stateFlag21 = stateFlag1
+//                }
+//
+//            }
+//        }
+//        R.id.btn21.onClick(this) {
+//            thread {
+//                runOnUiThread {
+//                    stateFlag21 = "正在赶往21楼的过程中..."
+//                    stateFlag1 = stateFlag21
+//                    stateFlag11 = stateFlag1
+//                }
+//                Thread.sleep(10000)
+//                runOnUiThread {
+//                    stateFlag21 = "恭喜你，21楼到了"
+//                    stateFlag1 = stateFlag21
+//                    stateFlag11 = stateFlag1
+//                }
+//
+//            }
+//        }
     }
 }
 

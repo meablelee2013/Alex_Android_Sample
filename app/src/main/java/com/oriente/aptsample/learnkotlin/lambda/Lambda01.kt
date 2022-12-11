@@ -120,9 +120,10 @@ fun main() {
 //        true
 //    }
     //要看run里面的返回的什么类型
-    fun s03() :String= run {  //run 返回{}里面的函数返回类型
+    fun s03(): String = run {  //run 返回{}里面的函数返回类型
         "A"
     }
+
     fun s04() = { true } //() ->Boolean  函数返回一个函数
     println(s03())
     println(s04()())
@@ -131,6 +132,11 @@ fun main() {
 
 fun String.shows() {
     println("你是$this")
+}
+
+//只有函数才支持默认参数
+fun testDefaultParams(name: String = "aaa") {
+
 }
 
 

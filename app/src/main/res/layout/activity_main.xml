@@ -8,11 +8,14 @@
     <TextView
         android:id="@+id/text_dashboard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/teal_200"
         android:textAlignment="center"
+        android:text="goUser"
         android:textSize="20sp" />
 
     <TextView

@@ -103,26 +103,20 @@ public class RouteProcessor extends HandlerProcess.Handler {
         for (Element element : elementsAnnotatedWith) {
             if (element.getKind() == ElementKind.CLASS) {//元素是类
                 TypeElement typeElement = (TypeElement) element;
-                mProcessor.mMessager.printMessage(Diagnostic.Kind.NOTE, ">>>>>>>>>>>>>>>>>" + typeElement.getSimpleName());
+                mProcessor.mMessager.printMessage(Diagnostic.Kind.NOTE, "className>>>>>>>>>>>>>>>>>" + typeElement.getSimpleName());
                 Route route = element.getAnnotation(Route.class);
 
                 packageName = mProcessor.mElementUtils.getPackageOf(element).getQualifiedName().toString();
+                mProcessor.mMessager.printMessage(Diagnostic.Kind.NOTE, "packageName>>>>>>>>>>>>>>>>>" + packageName);
 
                 className = typeElement.getSimpleName() + "$Route";
                 ClassName className1 = ClassName.get((TypeElement) element);
-                mProcessor.mMessager.printMessage(Diagnostic.Kind.NOTE, ">>>>>>>>className>>>>>>>>>" + className1);
 
                 initMethod.addStatement("routerMaps.put($S,$T.class)", route.name(), className1);
             }
         }
-        MethodSpec getClass = MethodSpec.methodBuilder("getTarget")
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(Class.class)
-                .addParameter(String.class, "path")
-                .addStatement("return (Class)routerMaps.get(path)")
-                .build();
-        TypeSpec classNameSpec = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addField(fieldSpec).addMethod(getClass).addMethod(initMethod.build()).build();
+        MethodSpec getClass = MethodSpec.methodBuilder("getTarget").addModifiers(Modifier.PUBLIC, Modifier.STATIC).returns(Class.class).addParameter(String.class, "path").addStatement("return (Class)routerMaps.get(path)").build();
+        TypeSpec classNameSpec = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL).addField(fieldSpec).addMethod(getClass).addMethod(initMethod.build()).build();
 
         JavaFile javaFile = JavaFile.builder(packageName, classNameSpec).build();
 
@@ -131,10 +125,6 @@ public class RouteProcessor extends HandlerProcess.Handler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean isEmpty(String args) {
-        return args == null || "".equals(args);
     }
 
     /**

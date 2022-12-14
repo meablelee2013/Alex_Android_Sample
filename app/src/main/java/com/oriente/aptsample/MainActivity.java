@@ -1,11 +1,14 @@
 package com.oriente.aptsample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.user.ThirdActivity$Route;
 import com.oriente.anno.BindView;
 import com.oriente.anno.Route;
 import com.oriente.anno.RouteInfo;
@@ -26,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("MainActivity");
+        ThirdActivity$Route.init();
+        findViewById(R.id.text_dashboard).setOnClickListener(v -> {
+            Class target = ThirdActivity$Route.getTarget("ThirdActivity");
+            startActivity(new Intent(this, target));
 
+        });
 
 
 //        ButterKnife.bind(this);

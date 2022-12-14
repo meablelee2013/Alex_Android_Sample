@@ -2,6 +2,6 @@ package com.oriente.aptsample;
 
 import com.oriente.anno.Route;
 
-@Route(name = "router1")
-public class Router1 {
+@Route(name = "router2")
+public class Router2Activity {
 }

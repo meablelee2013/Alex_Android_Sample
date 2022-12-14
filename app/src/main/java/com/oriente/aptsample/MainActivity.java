@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("MainActivity");
-        ThirdActivity$Route.init();
         findViewById(R.id.text_dashboard).setOnClickListener(v -> {
             Class target = ThirdActivity$Route.getTarget("ThirdActivity");
             startActivity(new Intent(this, target));

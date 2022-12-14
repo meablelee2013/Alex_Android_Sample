@@ -3,6 +3,7 @@ package com.oriente.compiler;
 import com.oriente.anno.Route;
 import com.oriente.compiler.base.HandlerProcess;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -98,8 +99,9 @@ public class RouteProcessor extends HandlerProcess.Handler {
     private void javaPoet(Set<? extends Element> elementsAnnotatedWith) {
         String packageName = null;
         String className = null;
-        MethodSpec.Builder initMethod = MethodSpec.methodBuilder("init").addModifiers(Modifier.PUBLIC, Modifier.STATIC);
+//        MethodSpec.Builder initMethod = MethodSpec.methodBuilder("init").addModifiers(Modifier.PUBLIC, Modifier.STATIC);
         FieldSpec fieldSpec = FieldSpec.builder(HashMap.class, "routerMaps", Modifier.PRIVATE, Modifier.STATIC).initializer("new HashMap<$1T,$2T>()", String.class, Class.class).build();
+        CodeBlock.Builder codeBlockBuilder = CodeBlock.builder();
         for (Element element : elementsAnnotatedWith) {
             if (element.getKind() == ElementKind.CLASS) {//元素是类
                 TypeElement typeElement = (TypeElement) element;
@@ -111,12 +113,15 @@ public class RouteProcessor extends HandlerProcess.Handler {
 
                 className = typeElement.getSimpleName() + "$Route";
                 ClassName className1 = ClassName.get((TypeElement) element);
-
-                initMethod.addStatement("routerMaps.put($S,$T.class)", route.name(), className1);
+                codeBlockBuilder.addStatement("routerMaps.put($S,$T.class)", route.name(), className1);
+//                initMethod.addStatement("routerMaps.put($S,$T.class)", route.name(), className1);
             }
         }
         MethodSpec getClass = MethodSpec.methodBuilder("getTarget").addModifiers(Modifier.PUBLIC, Modifier.STATIC).returns(Class.class).addParameter(String.class, "path").addStatement("return (Class)routerMaps.get(path)").build();
-        TypeSpec classNameSpec = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL).addField(fieldSpec).addMethod(getClass).addMethod(initMethod.build()).build();
+        TypeSpec classNameSpec = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL).addField(fieldSpec).addMethod(getClass)
+                .addStaticBlock(codeBlockBuilder.build())
+//                .addMethod(initMethod.build())
+                .build();
 
         JavaFile javaFile = JavaFile.builder(packageName, classNameSpec).build();
 

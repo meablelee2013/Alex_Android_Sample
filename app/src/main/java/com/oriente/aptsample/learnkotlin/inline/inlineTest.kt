@@ -1,4 +1,4 @@
-package com.oriente.aptsample.inline
+package com.oriente.aptsample.learnkotlin.inline
 
 
 inline fun hello(){

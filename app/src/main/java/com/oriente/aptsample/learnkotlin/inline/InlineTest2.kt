@@ -1,4 +1,4 @@
-package com.oriente.aptsample.inline
+package com.oriente.aptsample.learnkotlin.inline
 
 
 //const val PI=3.1415

@@ -1,4 +1,4 @@
-package com.oriente.aptsample.coroutine
+package com.oriente.aptsample.learnkotlin.coroutine
 
 import android.annotation.SuppressLint
 import android.app.Activity

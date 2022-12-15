@@ -7,6 +7,8 @@ import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.RoundEnvironment;
@@ -99,8 +102,17 @@ public class RouteProcessor extends HandlerProcess.Handler {
     private void javaPoet(Set<? extends Element> elementsAnnotatedWith) {
         String packageName = null;
         String className = null;
+
+
 //        MethodSpec.Builder initMethod = MethodSpec.methodBuilder("init").addModifiers(Modifier.PUBLIC, Modifier.STATIC);
-        FieldSpec fieldSpec = FieldSpec.builder(HashMap.class, "routerMaps", Modifier.PRIVATE, Modifier.STATIC).initializer("new HashMap<$1T,$2T>()", String.class, Class.class).build();
+        //Map<String, Class>
+        TypeName mapTypeName = ParameterizedTypeName.get(
+                ClassName.get(Map.class),        // Map
+                ClassName.get(String.class),// Map<String,
+                ClassName.get(Class.class)  //Class>
+        );
+        FieldSpec fieldSpec = FieldSpec.builder(mapTypeName, "routerMaps", Modifier.PRIVATE, Modifier.STATIC)
+                .initializer("new $T()", HashMap.class).build();
         CodeBlock.Builder codeBlockBuilder = CodeBlock.builder();
         for (Element element : elementsAnnotatedWith) {
             if (element.getKind() == ElementKind.CLASS) {//元素是类
@@ -117,8 +129,15 @@ public class RouteProcessor extends HandlerProcess.Handler {
 //                initMethod.addStatement("routerMaps.put($S,$T.class)", route.name(), className1);
             }
         }
-        MethodSpec getClass = MethodSpec.methodBuilder("getTarget").addModifiers(Modifier.PUBLIC, Modifier.STATIC).returns(Class.class).addParameter(String.class, "path").addStatement("return (Class)routerMaps.get(path)").build();
-        TypeSpec classNameSpec = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL).addField(fieldSpec).addMethod(getClass)
+        MethodSpec getClass = MethodSpec.methodBuilder("getTarget")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC).returns(Class.class)
+                .addParameter(String.class, "path")
+                .addStatement("return routerMaps.get(path)")
+                .build();
+        TypeSpec classNameSpec = TypeSpec.classBuilder(className)
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                .addField(fieldSpec)
+                .addMethod(getClass)
                 .addStaticBlock(codeBlockBuilder.build())
 //                .addMethod(initMethod.build())
                 .build();

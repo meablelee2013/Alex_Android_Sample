@@ -16,5 +16,11 @@ class MainActivity : AppCompatActivity() {
             service.borrow()
             service.verifyBorrow()
         }
+        val userAction = AutoServiceUtil.getService(UserAction::class.java)
+        if (userAction != null && userAction is UserAction) {
+            userAction.getUserName()
+            userAction.setUserName("aaa")
+        }
+
     }
 }

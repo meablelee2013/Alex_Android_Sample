@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.oriente.aptsample"
@@ -66,5 +66,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //查看对象占用字节数
+    implementation 'org.openjdk.jol:jol-core:0.16'
 
 }

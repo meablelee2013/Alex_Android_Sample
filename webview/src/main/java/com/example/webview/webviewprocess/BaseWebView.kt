@@ -16,6 +16,8 @@ import com.google.gson.Gson
 
 
 class BaseWebView : WebView {
+    var gson: Gson = Gson()
+
     constructor(context: Context?) : super(context!!) {
         init()
     }
@@ -28,12 +30,8 @@ class BaseWebView : WebView {
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context!!, attrs, defStyleAttr, defStyleRes) {
-        init()
-    }
-
     private fun init() {
-//        WebViewProcessCommandDispatcher.getInstance().initAidlConnection()
+        WebViewProcessCommandDispatcher.initAidlConnection()
         AlexWebViewSetting.setSettings(this)
         addJavascriptInterface(this, "alexWebView")
     }
@@ -45,20 +43,14 @@ class BaseWebView : WebView {
 
     @JavascriptInterface
     fun takeNativeAction(jsParam: String?) {
-        Log.i(TAG, jsParam!!)
+        if (jsParam != null) {
+            Log.i(TAG, jsParam)
+        }
         if (!TextUtils.isEmpty(jsParam)) {
             val jsParamObject: JsParam = Gson().fromJson(jsParam, JsParam::class.java)
             if (jsParamObject != null) {
-                if (jsParamObject.name == "showToast") {
-                    val msg = Gson().fromJson(jsParamObject.param, Map::class.java)["message"]
-                    if (msg is String) {
-                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
-                    }
-                }
+                WebViewProcessCommandDispatcher.executeCommand(jsParamObject.name, gson.toJson(jsParamObject.param))
             }
-//            if (jsParamObject != null) {
-//                WebViewProcessCommandDispatcher.getInstance().executeCommand(jsParamObject.name, Gson().toJson(jsParamObject.param), this)
-//            }
         }
     }
 

@@ -19,7 +19,6 @@ class WebViewServiceImpl : IWebViewService {
             intent.putExtra(IS_SHOW_ACTION_BAR, isShowActionBar)
             context.startActivity(intent)
         }
-
     }
 
     override fun startDemoHtml(context: Context?) {
@@ -28,5 +27,4 @@ class WebViewServiceImpl : IWebViewService {
         intent.putExtra(URL, ANDROID_ASSET_URI + "demo.html")
         context!!.startActivity(intent)
     }
-
 }

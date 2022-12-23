@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+
 android {
     namespace 'com.example.base'
     compileSdk rootProject.compileSdk
@@ -52,4 +53,6 @@ dependencies {
     api  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 
     api 'com.google.code.gson:gson:2.8.5'
+
+
 }

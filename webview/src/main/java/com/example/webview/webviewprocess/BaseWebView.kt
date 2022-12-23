@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
-import android.widget.Toast
 import com.example.webview.WebViewCallBack
 import com.example.webview.bean.JsParam
 import com.example.webview.webviewprocess.settings.AlexWebViewSetting

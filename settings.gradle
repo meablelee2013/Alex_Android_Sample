@@ -1,26 +1,30 @@
 pluginManagement {
     repositories {
         // 本地仓库
-        mavenLocal()
+        google()
+        jcenter()
+        mavenCentral()
         maven {
             url 'https://jitpack.io'
             allowInsecureProtocol = true
         }
         gradlePluginPortal()
-        google()
-        mavenCentral()
+        mavenLocal()
     }
 }
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenLocal()
-
         google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
         mavenCentral()
     }
 }
 
 rootProject.name = "aptSample"
 include ':app'
+include ':webview'
+include ':base'
+include ':common'

@@ -9,7 +9,7 @@ import com.example.webview.BuildConfig
 
 object AlexWebViewSetting {
 
-    public fun setSettings(webView: WebView){
+    fun setSettings(webView: WebView) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             WebView.enableSlowWholeDocumentDraw()
         }

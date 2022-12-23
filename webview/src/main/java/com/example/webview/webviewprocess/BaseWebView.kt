@@ -6,10 +6,13 @@ import android.util.AttributeSet
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
+import android.widget.Toast
 import com.example.webview.WebViewCallBack
+import com.example.webview.bean.JsParam
 import com.example.webview.webviewprocess.settings.AlexWebViewSetting
 import com.example.webview.webviewprocess.webchromeclient.AlexWebChromeClient
 import com.example.webview.webviewprocess.webviewclient.AlexWebViewClient
+import com.google.gson.Gson
 
 
 class BaseWebView : WebView {
@@ -32,7 +35,7 @@ class BaseWebView : WebView {
     private fun init() {
 //        WebViewProcessCommandDispatcher.getInstance().initAidlConnection()
         AlexWebViewSetting.setSettings(this)
-        addJavascriptInterface(this, "alex")
+        addJavascriptInterface(this, "alexWebView")
     }
 
     fun registerWebViewCallBack(webViewCallBack: WebViewCallBack?) {
@@ -43,18 +46,26 @@ class BaseWebView : WebView {
     @JavascriptInterface
     fun takeNativeAction(jsParam: String?) {
         Log.i(TAG, jsParam!!)
-//        if (!TextUtils.isEmpty(jsParam)) {
-//            val jsParamObject: JsParam = Gson().fromJson(jsParam, JsParam::class.java)
+        if (!TextUtils.isEmpty(jsParam)) {
+            val jsParamObject: JsParam = Gson().fromJson(jsParam, JsParam::class.java)
+            if (jsParamObject != null) {
+                if (jsParamObject.name == "showToast") {
+                    val msg = Gson().fromJson(jsParamObject.param, Map::class.java)["message"]
+                    if (msg is String) {
+                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
 //            if (jsParamObject != null) {
 //                WebViewProcessCommandDispatcher.getInstance().executeCommand(jsParamObject.name, Gson().toJson(jsParamObject.param), this)
 //            }
-//        }
+        }
     }
 
     fun handleCallback(callbackname: String, response: String) {
         if (!TextUtils.isEmpty(callbackname) && !TextUtils.isEmpty(response)) {
             post {
-                val jscode = "javascript:xiangxuejs.callback('$callbackname',$response)"
+                val jscode = "javascript:alexjs.callback('$callbackname',$response)"
                 Log.e("xxxxxx", jscode)
                 evaluateJavascript(jscode, null)
             }
@@ -62,6 +73,6 @@ class BaseWebView : WebView {
     }
 
     companion object {
-        const val TAG = "XiangxueWebView"
+        const val TAG = "AlexWebView"
     }
 }

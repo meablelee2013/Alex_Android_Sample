@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mBinding.btn21.setOnClickListener {
             val next = ServiceLoader.load(IWebViewService::class.java).iterator().next()
-            next.startWebViewActivity(this, "https://www.baidu.com", "百度一下", true)
+//            next.startWebViewActivity(this, "https://www.baidu.com", "百度一下", true)
+            next.startDemoHtml(this)
         }
 
     }

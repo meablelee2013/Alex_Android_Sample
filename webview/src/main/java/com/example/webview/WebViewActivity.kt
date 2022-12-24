@@ -30,9 +30,4 @@ class WebViewActivity : AppCompatActivity() {
     fun updateTitle(title: String?) {
         mBinding.title.text = title
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        fragment.unBind()
-    }
 }

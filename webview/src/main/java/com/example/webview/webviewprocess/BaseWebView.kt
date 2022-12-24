@@ -35,7 +35,7 @@ class BaseWebView : WebView {
      */
     private fun init() {
         //在WebView
-        WebViewProcessCommandDispatcher.initAidlConnection()
+        WebViewProcessCommandDispatcher.startAidlConnection()
         AlexWebViewSetting.setSettings(this)
         addJavascriptInterface(this, "alexWebView")
     }
@@ -71,7 +71,9 @@ class BaseWebView : WebView {
         }
     }
 
-    fun unBind() {
+
+
+    public fun unBind() {
         WebViewProcessCommandDispatcher.unBind()
     }
 

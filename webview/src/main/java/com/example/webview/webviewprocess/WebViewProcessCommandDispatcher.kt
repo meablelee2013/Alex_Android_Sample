@@ -15,10 +15,11 @@ import com.example.webview.mainprocess.MainProcessCommandService
  * 连接主进程的服务 --- Client
  */
 object WebViewProcessCommandDispatcher : ServiceConnection {
+    private var mBinded: Boolean = false
     private var iWebViewProcessToMainProcessInterface: IWebViewProcessToMainProcessInterface? = null
 
 
-    fun initAidlConnection() {
+    fun startAidlConnection() {
         val intent = Intent(BaseApplication.sApplication, MainProcessCommandService::class.java)
         BaseApplication.sApplication?.bindService(intent, this, Context.BIND_AUTO_CREATE)
     }
@@ -28,26 +29,30 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
      */
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         iWebViewProcessToMainProcessInterface = IWebViewProcessToMainProcessInterface.Stub.asInterface(service)
+        mBinded = true
     }
 
     /**
      * 断开之后重新连接
      */
     override fun onServiceDisconnected(name: ComponentName?) {
+        mBinded = false
         iWebViewProcessToMainProcessInterface = null
-        initAidlConnection()
+        startAidlConnection()
     }
 
     /**
      * 死掉之后重新连接
      */
     override fun onBindingDied(name: ComponentName?) {
+        mBinded = false
         iWebViewProcessToMainProcessInterface = null
-        initAidlConnection()
+        startAidlConnection()
     }
 
     fun executeCommand(commandName: String?, params: String, baseWebView: BaseWebView) {
-        iWebViewProcessToMainProcessInterface?.handleWebCommand(commandName,
+        iWebViewProcessToMainProcessInterface?.handleWebCommand(
+            commandName,
             params,
             object : ICallbackFromMainprocessToWebViewProcessInterface.Stub() {
                 @Throws(RemoteException::class)
@@ -57,7 +62,11 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
             })
     }
 
+
     fun unBind() {
-        BaseApplication.sApplication?.unbindService(this)
+        if (mBinded) {
+            BaseApplication.sApplication?.unbindService(this)
+            mBinded = false
+        }
     }
 }

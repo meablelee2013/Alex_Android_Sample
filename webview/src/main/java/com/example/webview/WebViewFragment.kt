@@ -100,7 +100,9 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
         }
     }
 
-    fun unBind() {
+    override fun onDestroy() {
+        super.onDestroy()
         mBinding.webview.unBind()
     }
+
 }

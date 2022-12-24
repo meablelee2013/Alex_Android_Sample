@@ -6,8 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import com.example.base.loadsir.BaseApplication
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
-import command.WebViewCommand
 import com.google.auto.service.AutoService
+import command.WebViewCommand
 
 
 const val TAG = "CommandShowToast"

@@ -1,10 +1,10 @@
 package com.example.webview.mainprocess
 
 import android.annotation.SuppressLint
-import command.WebViewCommand
-import com.example.webview.IWebviewProcessToMainProcessInterface
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
+import com.example.webview.IWebviewProcessToMainProcessInterface
 import com.google.gson.Gson
+import command.WebViewCommand
 import java.util.*
 
 const val TAG = "MainProcessCommandsManager"

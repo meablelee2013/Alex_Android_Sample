@@ -5,8 +5,8 @@ import android.net.Uri
 import android.util.Log
 import com.example.base.loadsir.BaseApplication
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
-import command.WebViewCommand
 import com.google.auto.service.AutoService
+import command.WebViewCommand
 
 
 @AutoService(WebViewCommand::class)

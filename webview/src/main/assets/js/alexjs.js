@@ -19,20 +19,20 @@ alexjs.callback = function (callbackname, response) {
    }
 }
 
-alexjs.takeNativeAction = function(commandname, parameters){
-    console.log("alexjs takenativeaction")
+alexjs.callNativeAction = function(commandname, parameters){
+    console.log("alexjs callNativeAction")
     var request = {};
     request.name = commandname;
     request.param = parameters;
     if(window.alexjs.os.isAndroid){
         console.log("android take native action" + JSON.stringify(request));
-        window.alexWebView.takeNativeAction(JSON.stringify(request));
+        window.alexWebView.callNativeAction(JSON.stringify(request));
     } else {
         window.webkit.messageHandlers.alexWebView.postMessage(JSON.stringify(request))
     }
 }
 
-alexjs.takeNativeActionWithCallback = function(commandname, parameters, callback) {
+alexjs.callNativeActionWithCallback = function(commandname, parameters, callback) {
     var callbackname = "nativetojs_callback_" +  (new Date()).getTime() + "_" + Math.floor(Math.random() * 10000);
     alexjs.callbacks[callbackname] = {callback:callback};
 
@@ -41,7 +41,7 @@ alexjs.takeNativeActionWithCallback = function(commandname, parameters, callback
     request.param = parameters;
     request.param.callbackname = callbackname;
     if(window.alexjs.os.isAndroid){
-        window.alexWebView.takeNativeAction(JSON.stringify(request));
+        window.alexWebView.callNativeAction(JSON.stringify(request));
     } else {
         window.webkit.messageHandlers.alexWebView.postMessage(JSON.stringify(request))
     }

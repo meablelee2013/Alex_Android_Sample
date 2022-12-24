@@ -40,8 +40,11 @@ class BaseWebView : WebView {
         webChromeClient = AlexWebChromeClient(webViewCallBack)
     }
 
+    /**
+     * 暴露给h5调用的方法
+     */
     @JavascriptInterface
-    fun takeNativeAction(jsParam: String?) {
+    fun callNativeAction(jsParam: String?) {
         if (jsParam != null) {
             Log.i(TAG, jsParam)
         }

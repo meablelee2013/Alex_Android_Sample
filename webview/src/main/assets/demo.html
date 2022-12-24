@@ -19,23 +19,23 @@
     <script>
         function callAppToast(){
             console.log("callAppToast.");
-            alexjs.takeNativeAction("showToast", {message: "this is a message from html."});
+            alexjs.callNativeAction("showToast", {message: "this is a message from html."});
         }
         function openActivityA(){
             console.log("openActivityA.");
-            alexjs.takeNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
+            alexjs.callNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
         }
         function openActivityB(){
             console.log("openActivityA.");
-            alexjs.takeNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
+            alexjs.callNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
         }
          function openSchema(){
             console.log("openSchema.");
-            alexjs.takeNativeAction("openSchema", {schema: "alex://goods"});
+            alexjs.callNativeAction("openSchema", {schema: "alex://goods"});
         }
         function login(){
             console.log("login.");
-            alexjs.takeNativeActionWithCallback("login", {}, function(res) {
+            alexjs.callNativeActionWithCallback("login", {}, function(res) {
                  var element = document.createElement("div");
                  element.appendChild(document.createTextNode("userName: "+res.accountName));
                  document.getElementById('login_id').appendChild(element);

@@ -32,7 +32,7 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
     }
 
     companion object {
-        fun newInstance(url: String?, canNativeRefresh: Boolean): WebViewFragment? {
+        fun newInstance(url: String?, canNativeRefresh: Boolean): WebViewFragment {
             val fragment = WebViewFragment()
             val bundle = Bundle()
             bundle.putString(URL, url)

@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.webview.WebViewCallBack
 import com.example.webview.apiservice.FileApiService
 import com.example.webview.utils.WebUtil
+import com.example.webview.webviewprocess.BaseWebView
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import java.io.File
@@ -28,6 +29,9 @@ class AlexWebViewClient(var webViewCallBack: WebViewCallBack?) : WebViewClient()
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
+        if (view != null && view is BaseWebView) {
+            view.postBlankMonitorRunnable()
+        }
         if (webViewCallBack != null) {
             webViewCallBack!!.onPageStarted(url)
         } else {
@@ -41,6 +45,10 @@ class AlexWebViewClient(var webViewCallBack: WebViewCallBack?) : WebViewClient()
             webViewCallBack!!.onPageFinished(url)
         } else {
             Log.d(TAG, "webViewCallBack cannot be null")
+        }
+        // 放在这里其实不是最佳 页面加载完后发生异常导致白屏的情况就检测不到了 这里只是个demo
+        if (view != null && view is BaseWebView) {
+            view.removeBlankMonitorRunnable()
         }
     }
 
@@ -132,7 +140,7 @@ class AlexWebViewClient(var webViewCallBack: WebViewCallBack?) : WebViewClient()
     /**
      * 可缓存文件请求
      */
-    private  fun cacheResourceRequest(
+    private fun cacheResourceRequest(
         context: Context, webRequest: WebResourceRequest
     ): WebResourceResponse? {
         var url = webRequest.url.toString()

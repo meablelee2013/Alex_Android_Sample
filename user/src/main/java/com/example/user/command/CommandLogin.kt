@@ -27,12 +27,12 @@ class CommandLogin : WebViewCommand {
         return "login"
     }
 
-    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+    override fun execute(params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
         Log.d("CommandLogin", params.toString())
         if (iUserCenterService != null && !iUserCenterService.isLogin()) {
             iUserCenterService?.login()
             this.callback = callback
-            this.callbacknameFromNativeJs = params["callbackname"].toString()
+            this.callbacknameFromNativeJs = params?.get("callbackname")?.toString()
         }
     }
 

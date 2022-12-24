@@ -18,11 +18,11 @@ class CommandShowToast : WebViewCommand {
         return "showToast"
     }
 
-    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+    override fun execute(params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
         Log.d(TAG, "${Thread.currentThread() == Looper.getMainLooper().thread}")
         val handler = Handler(Looper.getMainLooper())
         handler.post {
-            val msg = params["message"].toString()
+            val msg = params?.get("message").toString()
             Toast.makeText(BaseApplication.sApplication, msg, Toast.LENGTH_LONG).show()
         }
     }

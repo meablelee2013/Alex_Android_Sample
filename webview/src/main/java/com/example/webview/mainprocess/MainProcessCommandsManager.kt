@@ -14,6 +14,7 @@ import java.util.*
  */
 object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub() {
     private val mWebViewCommands = HashMap<String, WebViewCommand>()
+    private val mGson = Gson()
 
     init {
         val serviceLoader: ServiceLoader<WebViewCommand> = ServiceLoader.load(WebViewCommand::class.java)
@@ -30,14 +31,17 @@ object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub()
      * 处理来自html的各种请求
      */
     override fun handleWebCommand(commandName: String?, jsonParmas: String?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
-        val fromJson = Gson().fromJson<Map<*, *>>(jsonParmas, MutableMap::class.java)
-        if (fromJson is Map<*, *>) {
-            executeCommand(commandName, fromJson as Map<String, Any>, callback)
-        }
+        executeCommand(
+            commandName,
+            mGson.fromJson<Map<*, *>>(
+                jsonParmas,
+                MutableMap::class.java
+            ), callback
+        )
     }
 
     @SuppressLint("LongLogTag")
-    private fun executeCommand(commandName: String?, params: Map<String, Any>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+    private fun executeCommand(commandName: String?, params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
         mWebViewCommands[commandName]?.execute(params, callback)
     }
 

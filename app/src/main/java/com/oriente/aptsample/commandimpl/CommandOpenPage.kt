@@ -14,8 +14,8 @@ class CommandOpenPage : WebViewCommand {
         return "openPage"
     }
 
-    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
-        val targetClass: String = params["target_class"].toString()
+    override fun execute(params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+        val targetClass: String = params?.get("target_class").toString()
         if (!TextUtils.isEmpty(targetClass)) {
             val intent = Intent()
             intent.component = BaseApplication.sApplication?.let { ComponentName(it, targetClass) }

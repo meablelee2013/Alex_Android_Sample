@@ -15,9 +15,9 @@ class CommandOpenSchema : WebViewCommand {
         return "openSchema"
     }
 
-    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+    override fun execute(params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
 
-        val schema: String = params["schema"].toString()
+        val schema: String = params?.get("schema").toString()
         Log.d("CommandOpenSchema", schema)
         val intent = Intent()
         intent.action = Intent.ACTION_VIEW

@@ -6,6 +6,6 @@ interface WebViewCommand {
 
     fun name(): String?
 
-    fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface)
+    fun execute(params: Map<*, *>?, callback: ICallbackFromMainprocessToWebViewProcessInterface)
 
 }

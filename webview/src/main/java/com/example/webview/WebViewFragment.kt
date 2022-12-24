@@ -19,7 +19,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
     private var mUrl: String? = null
     private var mCanNativeRefresh: Boolean? = null
-    lateinit var mBinding: FragmentWebviewBinding
+    private lateinit var mBinding: FragmentWebviewBinding
     private var mLoadService: LoadService<*>? = null
     private var mIsError = false
 
@@ -86,7 +86,6 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
         if (activtiy is WebViewActivity) {
             activtiy.updateTitle(title)
         }
-
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
@@ -99,5 +98,9 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
         } else {
             requireActivity().finish()
         }
+    }
+
+    fun unBind() {
+        mBinding.webview.unBind()
     }
 }

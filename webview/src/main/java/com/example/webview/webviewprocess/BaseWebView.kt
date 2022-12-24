@@ -71,6 +71,10 @@ class BaseWebView : WebView {
         }
     }
 
+    fun unBind() {
+        WebViewProcessCommandDispatcher.unBind()
+    }
+
     companion object {
         const val TAG = "AlexWebView"
     }

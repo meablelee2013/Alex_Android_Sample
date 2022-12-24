@@ -56,4 +56,8 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
                 }
             })
     }
+
+    fun unBind() {
+        BaseApplication.sApplication?.unbindService(this)
+    }
 }

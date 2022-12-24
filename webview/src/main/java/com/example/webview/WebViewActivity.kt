@@ -9,24 +9,30 @@ import com.example.webview.utils.URL
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityWebviewBinding
-
+    private lateinit var fragment: WebViewFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_webview)
         mBinding.title.text = intent?.getStringExtra(TITLE)
 
-        val fragment = WebViewFragment.BaseWebViewFragment.newInstance(intent.getStringExtra(URL), true)
+        fragment = WebViewFragment.BaseWebViewFragment.newInstance(intent.getStringExtra(URL), true)!!
         val beginTransaction = supportFragmentManager.beginTransaction()
-
-        mBinding.back.setOnClickListener {
-            fragment?.goBack()
-        }
         if (fragment != null) {
             beginTransaction.replace(R.id.web_view_fragment, fragment).commit()
         }
+
+        mBinding.back.setOnClickListener {
+            fragment.goBack()
+        }
+
     }
 
     fun updateTitle(title: String?) {
         mBinding.title.text = title
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragment.unBind()
     }
 }

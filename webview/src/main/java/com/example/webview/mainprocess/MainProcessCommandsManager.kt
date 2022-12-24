@@ -8,6 +8,8 @@ import com.google.gson.Gson
 import java.util.*
 
 /**
+ *
+ * 处理来自html的各种请求（html-->native）
  * 主进程给WebView进程提供服务，需要继承Stub类
  */
 object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub() {
@@ -24,6 +26,9 @@ object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub()
         }
     }
 
+    /**
+     * 处理来自html的各种请求
+     */
     override fun handleWebCommand(commandName: String?, jsonParmas: String?, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
         val fromJson = Gson().fromJson<Map<*, *>>(jsonParmas, MutableMap::class.java)
         if (fromJson is Map<*, *>) {

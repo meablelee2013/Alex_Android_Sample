@@ -1,10 +1,9 @@
 // IWebviewProcessToMainProcessInterface.aidl
 package com.example.webview;
 
-// Declare any non-default types here with import statements
+import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface;
 
 interface IWebviewProcessToMainProcessInterface {
 
-
-   void handleWebCommand(String commandName,String jsonParmas);
+   void handleWebCommand(String commandName,String jsonParmas,in ICallbackFromMainprocessToWebViewProcessInterface callback);
 }

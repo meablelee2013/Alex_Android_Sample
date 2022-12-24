@@ -1,19 +1,20 @@
-package com.example.common.commandimpl
+package com.oriente.aptsample.commandimpl
 
 import android.content.ComponentName
 import android.content.Intent
 import android.text.TextUtils
 import com.example.base.loadsir.BaseApplication
-import com.example.base.loadsir.command.Command
+import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
+import command.WebViewCommand
 import com.google.auto.service.AutoService
 
-@AutoService(Command::class)
-class CommandOpenPage : Command {
+@AutoService(WebViewCommand::class)
+class CommandOpenPage : WebViewCommand {
     override fun name(): String? {
         return "openPage"
     }
 
-    override fun execute(params: Map<*, *>) {
+    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
         val targetClass: String = params["target_class"].toString()
         if (!TextUtils.isEmpty(targetClass)) {
             val intent = Intent()

@@ -1,20 +1,22 @@
-package com.example.common.commandimpl
+package com.oriente.aptsample.commandimpl
 
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.example.base.loadsir.BaseApplication
-import com.example.base.loadsir.command.Command
+import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
+import command.WebViewCommand
 import com.google.auto.service.AutoService
 
 
-@AutoService(Command::class)
-class CommandOpenSchema : Command {
+@AutoService(WebViewCommand::class)
+class CommandOpenSchema : WebViewCommand {
     override fun name(): String? {
         return "openSchema"
     }
 
-    override fun execute(params: Map<*, *>) {
+    override fun execute(params: Map<*, *>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
+
         val schema: String = params["schema"].toString()
         Log.d("CommandOpenSchema", schema)
         val intent = Intent()

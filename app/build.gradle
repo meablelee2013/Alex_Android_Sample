@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdk rootProject.compileSdk
 
@@ -101,10 +104,12 @@ dependencies {
 
 
     implementation project(":webview")
-    implementation project(":base")
+//    implementation project(":base")
     implementation project(":common")
+    implementation project(":user")
 
 
-
+    implementation 'com.google.auto.service:auto-service:1.0.1'
+    kapt 'com.google.auto.service:auto-service:1.0.1'
 
 }

@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.os.RemoteException
 import com.example.base.loadsir.BaseApplication
+import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
 import com.example.webview.IWebviewProcessToMainProcessInterface
 import com.example.webview.mainprocess.MainProcessCommandService
 
@@ -45,9 +47,14 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
         initAidlConnection()
     }
 
-    fun executeCommand(commandName: String?, params: String) {
-        if (iWebviewProcessToMainProcessInterface != null) {
-            iWebviewProcessToMainProcessInterface?.handleWebCommand(commandName, params)
-        }
+    fun executeCommand(commandName: String?, params: String, baseWebView: BaseWebView) {
+        iWebviewProcessToMainProcessInterface?.handleWebCommand(commandName,
+            params,
+            object : ICallbackFromMainprocessToWebViewProcessInterface.Stub() {
+                @Throws(RemoteException::class)
+                override fun onResult(callbackname: String?, response: String?) {
+                    baseWebView.handleCallback(callbackname, response)
+                }
+            })
     }
 }

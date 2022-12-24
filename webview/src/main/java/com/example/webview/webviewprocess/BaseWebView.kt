@@ -48,12 +48,12 @@ class BaseWebView : WebView {
         if (!TextUtils.isEmpty(jsParam)) {
             val jsParamObject: JsParam = Gson().fromJson(jsParam, JsParam::class.java)
             if (jsParamObject != null) {
-                WebViewProcessCommandDispatcher.executeCommand(jsParamObject.name, gson.toJson(jsParamObject.param))
+                WebViewProcessCommandDispatcher.executeCommand(jsParamObject.name, gson.toJson(jsParamObject.param), this)
             }
         }
     }
 
-    fun handleCallback(callbackname: String, response: String) {
+    fun handleCallback(callbackname: String?, response: String?) {
         if (!TextUtils.isEmpty(callbackname) && !TextUtils.isEmpty(response)) {
             post {
                 val jscode = "javascript:alexjs.callback('$callbackname',$response)"

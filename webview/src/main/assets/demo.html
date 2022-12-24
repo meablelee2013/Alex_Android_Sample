@@ -27,7 +27,11 @@
         }
         function openActivityB(){
             console.log("openActivityA.");
-            alexjs.takeNativeAction("openPage", {target_class: "com.xiangxue.webview.MainProcessTestActivityB"});
+            alexjs.takeNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
+        }
+         function openSchema(){
+            console.log("openSchema.");
+            alexjs.takeNativeAction("openSchema", {schema: "alex://goods"});
         }
         function login(){
             console.log("login.");
@@ -45,6 +49,7 @@
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="openActivityA()">打开MainProcessTestActivity</div>
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="openActivityB()">打开另外一个主进程的activity</div>
 <div id="login_id" class="item" style="font-size: 20px; color: #ffffff" onclick="login()">登录并且返回结果</div>
+<div class="item" style="font-size: 20px; color: #ffffff" onclick="openSchema()">打开一个Schema</div>
 
 </body>
 </html>

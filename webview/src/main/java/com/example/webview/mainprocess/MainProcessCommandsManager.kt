@@ -7,14 +7,19 @@ import com.example.webview.command.WebViewCommand
 import com.google.gson.Gson
 import java.util.*
 
+/**
+ * 主进程给WebView进程提供服务，需要继承Stub类
+ */
 object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub() {
-    private val mCommands = HashMap<String, WebViewCommand>()
+    private val mWebViewCommands = HashMap<String, WebViewCommand>()
 
     init {
         val serviceLoader: ServiceLoader<WebViewCommand> = ServiceLoader.load(WebViewCommand::class.java)
-        for (command in serviceLoader) {
-            if (!mCommands.containsKey(command.name())) {
-                mCommands[command.name()!!] = command
+        if (serviceLoader != null) {
+            for (command in serviceLoader) {
+                if (!mWebViewCommands.containsKey(command.name())) {
+                    mWebViewCommands[command.name()!!] = command
+                }
             }
         }
     }
@@ -28,7 +33,7 @@ object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub()
 
     @SuppressLint("LongLogTag")
     private fun executeCommand(commandName: String?, params: Map<String, Any>, callback: ICallbackFromMainprocessToWebViewProcessInterface) {
-        mCommands[commandName]?.execute(params, callback)
+        mWebViewCommands[commandName]?.execute(params, callback)
     }
 
 }

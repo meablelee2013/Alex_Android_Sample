@@ -34,6 +34,7 @@ class BaseWebView : WebView {
      *  Native的方法
      */
     private fun init() {
+        //在WebView
         WebViewProcessCommandDispatcher.initAidlConnection()
         AlexWebViewSetting.setSettings(this)
         addJavascriptInterface(this, "alexWebView")

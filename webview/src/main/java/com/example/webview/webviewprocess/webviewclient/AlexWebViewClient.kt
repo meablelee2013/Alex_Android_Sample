@@ -10,6 +10,9 @@ import com.example.webview.WebViewCallBack
 
 const val TAG = "AlexWebViewClient"
 
+/**
+ * 处理WebView
+ */
 class AlexWebViewClient(var webViewCallBack: WebViewCallBack?) : WebViewClient() {
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)

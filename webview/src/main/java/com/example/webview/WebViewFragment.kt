@@ -44,12 +44,11 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_webview, container, false)
-        webViewSetting()
-
         mLoadService = LoadSir.getDefault().register(mBinding.smartrefreshlayout) {
             mLoadService?.showCallback(LoadingCallback::class.java)
             mBinding.webview.reload()
         }
+        webViewSetting()
 
         mBinding.smartrefreshlayout.setOnRefreshListener(this)
         mCanNativeRefresh?.let { mBinding.smartrefreshlayout.setEnableRefresh(it) }

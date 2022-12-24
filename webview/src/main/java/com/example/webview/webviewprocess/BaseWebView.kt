@@ -78,6 +78,7 @@ class BaseWebView : WebView, LifecycleEventObserver {
             }
         }
     }
+
     /**
      * 调用后
      * 5s 后开始执行白屏检测任务 时间可以适当修改
@@ -158,12 +159,11 @@ class BaseWebView : WebView, LifecycleEventObserver {
 
     private var mBlankMonitorCallback: BlankMonitorCallback? = null
 
-    fun setBlankMonitorCallback(callback: BlankMonitorCallback){
+    fun setBlankMonitorCallback(callback: BlankMonitorCallback) {
         this.mBlankMonitorCallback = callback
     }
 
     inner class BlankMonitorRunnable : Runnable {
-
         override fun run() {
             val task = Thread {
                 // 根据宽高的 1/6 创建 bitmap
@@ -184,7 +184,7 @@ class BaseWebView : WebView, LifecycleEventObserver {
                         // 计数 其实记录一种就可以
                         if (snapshot.getPixel(x, y) == -1) {
                             whitePixelCount++
-                        }else{
+                        } else {
                             otherPixelCount++
                         }
                     }

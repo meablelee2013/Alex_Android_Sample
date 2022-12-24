@@ -5,8 +5,8 @@ import android.content.Intent
 import android.text.TextUtils
 import com.example.base.loadsir.BaseApplication
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
+import com.example.webview.command.WebViewCommand
 import com.google.auto.service.AutoService
-import command.WebViewCommand
 
 @AutoService(WebViewCommand::class)
 class CommandOpenPage : WebViewCommand {

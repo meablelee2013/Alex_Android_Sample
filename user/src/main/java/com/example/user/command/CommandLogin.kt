@@ -5,9 +5,9 @@ import com.example.common.AutoServiceManager
 import com.example.common.autoservice.IUserCenterService
 import com.example.common.eventbus.LoginEvent
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
+import com.example.webview.command.WebViewCommand
 import com.google.auto.service.AutoService
 import com.google.gson.Gson
-import command.WebViewCommand
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*

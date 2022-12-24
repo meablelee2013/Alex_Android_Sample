@@ -8,15 +8,14 @@ import android.os.IBinder
 import android.os.RemoteException
 import com.example.base.loadsir.BaseApplication
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
-import com.example.webview.IWebviewProcessToMainProcessInterface
+import com.example.webview.IWebViewProcessToMainProcessInterface
 import com.example.webview.mainprocess.MainProcessCommandService
-
 
 /**
  * 连接主进程的服务 --- Client
  */
 object WebViewProcessCommandDispatcher : ServiceConnection {
-    private var iWebviewProcessToMainProcessInterface: IWebviewProcessToMainProcessInterface? = null
+    private var iWebViewProcessToMainProcessInterface: IWebViewProcessToMainProcessInterface? = null
 
 
     fun initAidlConnection() {
@@ -28,14 +27,14 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
      * 连接成功
      */
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-        iWebviewProcessToMainProcessInterface = IWebviewProcessToMainProcessInterface.Stub.asInterface(service)
+        iWebViewProcessToMainProcessInterface = IWebViewProcessToMainProcessInterface.Stub.asInterface(service)
     }
 
     /**
      * 断开之后重新连接
      */
     override fun onServiceDisconnected(name: ComponentName?) {
-        iWebviewProcessToMainProcessInterface = null
+        iWebViewProcessToMainProcessInterface = null
         initAidlConnection()
     }
 
@@ -43,12 +42,12 @@ object WebViewProcessCommandDispatcher : ServiceConnection {
      * 死掉之后重新连接
      */
     override fun onBindingDied(name: ComponentName?) {
-        iWebviewProcessToMainProcessInterface = null
+        iWebViewProcessToMainProcessInterface = null
         initAidlConnection()
     }
 
     fun executeCommand(commandName: String?, params: String, baseWebView: BaseWebView) {
-        iWebviewProcessToMainProcessInterface?.handleWebCommand(commandName,
+        iWebViewProcessToMainProcessInterface?.handleWebCommand(commandName,
             params,
             object : ICallbackFromMainprocessToWebViewProcessInterface.Stub() {
                 @Throws(RemoteException::class)

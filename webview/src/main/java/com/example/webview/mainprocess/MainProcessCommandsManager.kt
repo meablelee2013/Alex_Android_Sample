@@ -2,14 +2,12 @@ package com.example.webview.mainprocess
 
 import android.annotation.SuppressLint
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
-import com.example.webview.IWebviewProcessToMainProcessInterface
+import com.example.webview.IWebViewProcessToMainProcessInterface
+import com.example.webview.command.WebViewCommand
 import com.google.gson.Gson
-import command.WebViewCommand
 import java.util.*
 
-const val TAG = "MainProcessCommandsManager"
-
-object MainProcessCommandsManager : IWebviewProcessToMainProcessInterface.Stub() {
+object MainProcessCommandsManager : IWebViewProcessToMainProcessInterface.Stub() {
     private val mCommands = HashMap<String, WebViewCommand>()
 
     init {

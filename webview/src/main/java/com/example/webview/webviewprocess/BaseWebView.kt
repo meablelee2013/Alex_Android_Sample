@@ -29,6 +29,10 @@ class BaseWebView : WebView {
         init()
     }
 
+    /**
+     *  alexWebView 这个对象会挂载在html的window上 ,在html的js里可以直接通过window.alexWebView.callNativeAction 来调用
+     *  Native的方法
+     */
     private fun init() {
         WebViewProcessCommandDispatcher.initAidlConnection()
         AlexWebViewSetting.setSettings(this)

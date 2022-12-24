@@ -15,17 +15,14 @@
          background-color: #999999;
          margin-top: 20px;
          }
-      </style>
+
+    </style>
     <script>
         function callAppToast(){
             console.log("callAppToast.");
             alexjs.callNativeAction("showToast", {message: "this is a message from html."});
         }
         function openActivityA(){
-            console.log("openActivityA.");
-            alexjs.callNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
-        }
-        function openActivityB(){
             console.log("openActivityA.");
             alexjs.callNativeAction("openPage", {target_class: "com.oriente.aptsample.MainProcessTestActivity"});
         }

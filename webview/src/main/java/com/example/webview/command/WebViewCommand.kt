@@ -1,4 +1,4 @@
-package command
+package com.example.webview.command
 
 import com.example.webview.ICallbackFromMainprocessToWebViewProcessInterface
 

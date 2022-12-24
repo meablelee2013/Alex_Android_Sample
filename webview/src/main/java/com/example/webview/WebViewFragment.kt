@@ -29,7 +29,7 @@ class WebViewFragment : Fragment(), WebViewCallBack, OnRefreshListener {
         mCanNativeRefresh = arguments?.getBoolean(CAN_NATIVE_REFRESH)
     }
 
-    object BaseWebViewFragment {
+    companion object {
         fun newInstance(url: String?, canNativeRefresh: Boolean): WebViewFragment? {
             val fragment = WebViewFragment()
             val bundle = Bundle()

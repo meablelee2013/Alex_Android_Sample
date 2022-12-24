@@ -15,7 +15,7 @@ class WebViewActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_webview)
         mBinding.title.text = intent?.getStringExtra(TITLE)
 
-        fragment = WebViewFragment.BaseWebViewFragment.newInstance(intent.getStringExtra(URL), true)!!
+        fragment = WebViewFragment.newInstance(intent.getStringExtra(URL), true)!!
         val beginTransaction = supportFragmentManager.beginTransaction()
         if (fragment != null) {
             beginTransaction.replace(R.id.web_view_fragment, fragment).commit()

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.oriente.aptsample.R
 import com.oriente.aptsample.sample1.injectcustomobjectwithprovides.Computer
 import com.oriente.aptsample.sample1.injectinterface.TestInterface
-import com.oriente.aptsample.sample1.injectcustomobjectwithinject.AnalyticsAdapter
+import com.oriente.aptsample.sample1.injectcustomobjectwithinjectinconstructor.AnalyticsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import javax.inject.Inject

@@ -1,8 +1,7 @@
-package com.oriente.aptsample.sample1.injectcustomobjectwithinject
+package com.oriente.aptsample.sample1.injectcustomobjectwithinjectinconstructor
 
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import com.oriente.aptsample.sample1.injectthirdparty.NetworkService
 import javax.inject.Inject
 
 class AnalyticsAdapter @Inject constructor(

@@ -9,7 +9,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class OkHttpRequest @Inject constructor() : IHttpRequest {
-    var okHttpClient: OkHttpClient = OkHttpClient()
+    private var okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
     var myHandler: Handler = Handler(Looper.getMainLooper())
 
 

@@ -8,6 +8,7 @@ import com.oriente.aptsample.MyApplication
 import com.oriente.aptsample.R
 import com.oriente.aptsample.databinding.ActivitySecondBinding
 import com.oriente.aptsample.sample2.app.annotation.BindOkHttp
+import com.oriente.aptsample.sample2.app.annotation.BindVolley
 import com.oriente.aptsample.sample2.bean.ResponseData
 import com.oriente.aptsample.sample2.network.callback.HttpCallback
 import com.oriente.aptsample.sample2.network.http.IHttpRequest
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class SecondActivity : AppCompatActivity() {
     var mBinding: ActivitySecondBinding? = null
 
-    @BindOkHttp
+//    @BindOkHttp
+    @BindVolley
     @Inject
     lateinit var iHttpRequest: IHttpRequest
 

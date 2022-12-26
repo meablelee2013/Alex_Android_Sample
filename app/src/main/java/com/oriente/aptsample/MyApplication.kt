@@ -2,10 +2,13 @@ package com.oriente.aptsample
 
 import android.app.Application
 import android.os.Debug
+import com.oriente.aptsample.sample2.app.annotation.BindOkHttp
+import com.oriente.aptsample.sample2.network.http.IHttpRequest
 import dagger.hilt.android.HiltAndroidApp
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @HiltAndroidApp
 class MyApplication : Application() {
@@ -17,5 +20,8 @@ class MyApplication : Application() {
         val logDate: String = dateFormat.format(Date())
         // Applies the date and time to the name of the trace log.
         Debug.startMethodTracing("sample-$logDate")
+
+
     }
+
 }

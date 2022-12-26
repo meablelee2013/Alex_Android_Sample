@@ -51,6 +51,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    dataBinding {
+        enabled = true
+    }
     //对于 Kotlin 项目，需要添加 kotlinOptions
     kotlinOptions {
         jvmTarget = "1.8"
@@ -77,6 +80,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit-converters:2.8.1'
 
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+
+    // net for sample2
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'org.xutils:xutils:3.3.36'
 
 
 }

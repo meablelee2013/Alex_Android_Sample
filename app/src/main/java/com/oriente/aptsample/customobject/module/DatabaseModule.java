@@ -1,7 +1,7 @@
-package com.oriente.aptsample.anotherusecase.module;
+package com.oriente.aptsample.customobject.module;
 
 
-import com.oriente.aptsample.anotherusecase.obj.DatabaseObject;
+import com.oriente.aptsample.customobject.obj.DatabaseObject;
 
 import dagger.Module;
 import dagger.Provides;

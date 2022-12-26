@@ -1,4 +1,4 @@
-package com.oriente.aptsample.anotherusecase.obj;
+package com.oriente.aptsample.customobject.obj;
 
 public class HttpObject {
 

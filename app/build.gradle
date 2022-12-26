@@ -17,28 +17,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "boolean", "active", "false"
             debuggable true
-        }
-
-        release {
-            minifyEnabled true
-            buildConfigField "boolean", "active", "false"
-            debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-
-        staging {
-            initWith(release)
-            matchingFallbacks = ['release', 'debug']
-            debuggable true
-            buildConfigField "boolean", "active", "true"
-        }
-        pre {
-            initWith(release)
-            matchingFallbacks = ['release', 'debug']
-            debuggable false
-            buildConfigField "boolean", "active", "true"
         }
     }
     compileOptions {
@@ -62,6 +41,7 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.44.2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.44.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

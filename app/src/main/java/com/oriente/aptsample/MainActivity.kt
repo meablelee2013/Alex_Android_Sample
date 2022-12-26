@@ -2,18 +2,21 @@ package com.oriente.aptsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.oriente.aptsample.customobject.component.DaggerMyComponent
 import com.oriente.aptsample.customobject.obj.HttpObject
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
+    @set:Inject
     var httpObject: HttpObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        //第一种方式
+        DaggerMyComponent.create().injectMainActivity2(this)
+        //第二种方式
 //        DaggerComputerComponent.builder()
 //                .httpModule(new HttpModule())
 //                .computerModule(new ComputerModule())

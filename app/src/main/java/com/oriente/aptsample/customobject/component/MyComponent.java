@@ -1,5 +1,6 @@
 package com.oriente.aptsample.customobject.component;
 
+import com.oriente.aptsample.MainActivity;
 import com.oriente.aptsample.customobject.module.DatabaseModule;
 import com.oriente.aptsample.customobject.module.HttpModule;
 

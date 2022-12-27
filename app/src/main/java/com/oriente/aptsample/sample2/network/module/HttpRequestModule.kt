@@ -11,26 +11,28 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 open abstract class HttpRequestModule {
 
     @BindOkHttp
     @Binds
-//    @Singleton
+    @Singleton
     abstract fun bindOkHttp(okHttpRequest: OkHttpRequest): IHttpRequest
 
-    //  @Binds      接口                实现类      绑定关系
+    //       接口                实现类      绑定关系
     @BindVolley
     @Binds
-//    @Singleton
+    @Singleton
     abstract fun bindVolley(volleyRequest: VolleyRequest): IHttpRequest
 
-    //  @Binds      接口                实现类      绑定关系
+    //       接口                实现类      绑定关系
     @BindXUtils
     @Binds
-//    @Singleton
+    @Singleton
     abstract fun bindXUtils(xUtilsRequest: XUtilsRequest): IHttpRequest
 }

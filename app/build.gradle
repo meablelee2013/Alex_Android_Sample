@@ -85,8 +85,10 @@ dependencies {
     // net for sample2
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.code.gson:gson:2.2.4'
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'org.xutils:xutils:3.3.36'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
 
 }

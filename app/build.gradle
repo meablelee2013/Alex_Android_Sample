@@ -59,7 +59,9 @@ android {
         jvmTarget = "1.8"
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -79,15 +81,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit-converters:2.8.1'
 
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-
 
     // net for sample2
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation 'org.xutils:xutils:3.3.36'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
 

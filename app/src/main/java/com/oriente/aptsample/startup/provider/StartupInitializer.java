@@ -18,6 +18,16 @@ public class StartupInitializer {
 
     public static String META_VALUE = "android.startup";
 
+    /**
+     * 通过pms拿到一个task,然后通过task的dependencies找到所有的task
+     * @param context
+     * @param providerName
+     * @return
+     * @throws PackageManager.NameNotFoundException
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
     public static List<AndroidStartup<?>> discoverAndInitialize(Context context, String providerName) throws PackageManager.NameNotFoundException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         Map<Class<? extends Startup>, AndroidStartup<?>> startups = new HashMap<>();
         //获取Manifest contentProvider 中的meta-data
@@ -41,7 +51,7 @@ public class StartupInitializer {
     private static void doInitialize(AndroidStartup<?> startup, Map<Class<? extends Startup>, AndroidStartup<?>> startups) throws IllegalAccessException, InstantiationException {
         startups.put(startup.getClass(), startup);
         if (startup.getDependenciesCount() != 0) {
-            //遍历父任务
+            //遍历其依赖任务
             for (Class<? extends Startup<?>> dependency : startup.dependencies()) {
                 doInitialize((AndroidStartup<?>) dependency.newInstance(), startups);
             }

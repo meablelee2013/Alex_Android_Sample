@@ -1,9 +1,10 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.oriente.aptsample"
@@ -62,6 +63,7 @@ dependencies {
 
 
     implementation("androidx.startup:startup-runtime:1.1.1")
+    implementation 'androidx.core:core-ktx:+'
 
 
     testImplementation 'junit:junit:4.13.2'

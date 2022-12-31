@@ -10,9 +10,12 @@ class NativeLib {
 
     external fun addInt(x: Int, y: Int): Int
 
+    external fun testArrayAction(count: Int, textInfo: String, ints: IntArray, strs: Array<String>)
+
     companion object {
         // Used to load the 'nativelib' library on application startup.
         init {
+            // System.load("") //加载绝对路径
             System.loadLibrary("nativelib")
         }
     }

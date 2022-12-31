@@ -18,36 +18,24 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "boolean", "active", "false"
             debuggable true
         }
 
         release {
             minifyEnabled true
-            buildConfigField "boolean", "active", "false"
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
-        staging {
-            initWith(release)
-            matchingFallbacks = ['release', 'debug']
-            debuggable true
-            buildConfigField "boolean", "active", "true"
-        }
-        pre {
-            initWith(release)
-            matchingFallbacks = ['release', 'debug']
-            debuggable false
-            buildConfigField "boolean", "active", "true"
-        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding true
+
+    dataBinding {
+        enabled true
     }
 }
 
@@ -69,4 +57,5 @@ dependencies {
     //查看对象占用字节数
     implementation 'org.openjdk.jol:jol-core:0.16'
 
+    implementation project (":nativelib")
 }

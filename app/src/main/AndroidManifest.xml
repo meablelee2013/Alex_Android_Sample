@@ -23,6 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".startup.startup.provider.TaskProvider"
+            android:authorities="${applicationId}.android_startup"
+            android:exported="false">
+
+            <meta-data
+                android:name="com.oriente.aptsample.startup.tasks.Task5"
+                android:value="android.startup" />
+        </provider>
+
         <activity
             android:name=".SecondActivity"
             android:process=":test" />

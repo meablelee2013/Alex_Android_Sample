@@ -13,6 +13,12 @@ import java.util.concurrent.Executor;
 public abstract class Task<T> implements AbsTask<T> {
     private CountDownLatch mWaitCountDown = new CountDownLatch(getDependenciesCount());
 
+    /**
+     * 此Task能否执行，取决于dependencies中有没有其他的Task，
+     * 如果有，则需要先让dependencies里的task先执行
+     *
+     * @return
+     */
     @Override
     public List<Class<? extends AbsTask<?>>> dependencies() {
         return null;

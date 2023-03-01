@@ -47,7 +47,7 @@ class FlowLayout : ViewGroup {
         var lineViews = ArrayList<View>() //保存一行中所有的View
         //记录这一行已经使用了多宽  每添加一个子View，需要记录当前的位置，当再放下一个子view时需要基于当前位置考虑是否放得下
         var lineWidthUsed = 0
-        var lineHeight = 0//一行的行高
+        var lineMaxHeight = 0//一行的行高
 
         var parentNeededWidth = 0//measure过程中，子View要求的父ViewGroup的宽
         var parentNeededHeight = 0//measure过程中，子View要求的父ViewGroup的高
@@ -76,25 +76,25 @@ class FlowLayout : ViewGroup {
                 if (childMeasuredWidth + lineWidthUsed + mHorizontalSpacing > selfWidth) {
                     //换行了，我们需要记录换行前的数据
                     allLines.add(lineViews)
-                    lineHeights.add(lineHeight)
+                    lineHeights.add(lineMaxHeight)
                     parentNeededWidth += lineWidthUsed + mHorizontalSpacing
-                    parentNeededHeight += lineHeight + mVerticalSpacing
+                    parentNeededHeight += lineMaxHeight + mVerticalSpacing
 
                     lineViews = ArrayList()
-                    lineHeight = 0
+                    lineMaxHeight = 0
                     lineWidthUsed = 0
 
                 }
                 lineViews.add(childView)
                 //每行都会有自己的宽高
                 lineWidthUsed += childMeasuredWidth + mHorizontalSpacing
-                lineHeight = lineHeight.coerceAtLeast(childMeasuredHeight)//max
+                lineMaxHeight = lineMaxHeight.coerceAtLeast(childMeasuredHeight)//max
             }
             if (i == childCount - 1) {
                 allLines.add(lineViews)
-                lineHeights.add(lineHeight)
+                lineHeights.add(lineMaxHeight)
                 parentNeededWidth += lineWidthUsed + mHorizontalSpacing
-                parentNeededHeight += lineHeight + mVerticalSpacing
+                parentNeededHeight += lineMaxHeight + mVerticalSpacing
             }
         }
 

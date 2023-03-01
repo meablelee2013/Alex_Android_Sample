@@ -54,8 +54,8 @@ class FlowLayout : ViewGroup {
 
 
         //先度量孩子
-        for (i in 0 until childCount) {
-            val childView = getChildAt(i)
+        for (childIndex in 0 until childCount) {
+            val childView = getChildAt(childIndex)
             val layoutParams = childView.layoutParams
             if (childView.visibility != GONE) {
                 //如何测量子View
@@ -90,7 +90,7 @@ class FlowLayout : ViewGroup {
                 lineWidthUsed += childMeasuredWidth + mHorizontalSpacing
                 lineHeightMax = lineHeightMax.coerceAtLeast(childMeasuredHeight)//max
             }
-            if (i == childCount - 1) {
+            if (childIndex == childCount - 1) {
                 allLines.add(lineViews)
                 lineHeights.add(lineHeightMax)
                 parentNeededWidth += lineWidthUsed + mHorizontalSpacing
@@ -124,12 +124,12 @@ class FlowLayout : ViewGroup {
         val allLinesSize = allLines.size
         var curL = paddingLeft
         var curT = paddingTop
-        for (i in 0 until allLinesSize) {
-            val lineViews = allLines[i]
-            val lineHeight = lineHeights[i]
+        for (lineIndex in 0 until allLinesSize) {
+            val lineViews = allLines[lineIndex]
+            val lineHeight = lineHeights[lineIndex]
             val lineCount = lineViews.size
-            for (j in 0 until lineCount) {
-                val childView = lineViews[j]
+            for (childIndex in 0 until lineCount) {
+                val childView = lineViews[childIndex]
                 val left = curL
                 val top = curT
                 val right = left + childView.measuredWidth

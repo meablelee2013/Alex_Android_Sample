@@ -47,7 +47,7 @@ class FlowLayout : ViewGroup {
         var lineViews = ArrayList<View>() //保存一行中所有的View
         //记录这一行已经使用了多宽  每添加一个子View，需要记录当前的位置，当再放下一个子view时需要基于当前位置考虑是否放得下
         var lineWidthUsed = 0
-        var lineMaxHeight = 0//一行的行高
+        var lineHeightMax = 0//一行的行高
 
         var parentNeededWidth = 0//measure过程中，子View要求的父ViewGroup的宽
         var parentNeededHeight = 0//measure过程中，子View要求的父ViewGroup的高
@@ -73,28 +73,28 @@ class FlowLayout : ViewGroup {
                 val childMeasuredWidth = childView.measuredWidth
                 val childMeasuredHeight = childView.measuredHeight
                 //如果需要换行 首先记录换行前的数据，并将每行的窗口清零
-                if (childMeasuredWidth + lineWidthUsed + mHorizontalSpacing > selfWidth) {
+                if (lineWidthUsed + childMeasuredWidth + mHorizontalSpacing > selfWidth) {
                     //换行了，我们需要记录换行前的数据
                     allLines.add(lineViews)
-                    lineHeights.add(lineMaxHeight)
+                    lineHeights.add(lineHeightMax)
                     parentNeededWidth += lineWidthUsed + mHorizontalSpacing
-                    parentNeededHeight += lineMaxHeight + mVerticalSpacing
+                    parentNeededHeight += lineHeightMax + mVerticalSpacing
 
                     lineViews = ArrayList()
-                    lineMaxHeight = 0
+                    lineHeightMax = 0
                     lineWidthUsed = 0
 
                 }
                 lineViews.add(childView)
                 //每行都会有自己的宽高
                 lineWidthUsed += childMeasuredWidth + mHorizontalSpacing
-                lineMaxHeight = lineMaxHeight.coerceAtLeast(childMeasuredHeight)//max
+                lineHeightMax = lineHeightMax.coerceAtLeast(childMeasuredHeight)//max
             }
             if (i == childCount - 1) {
                 allLines.add(lineViews)
-                lineHeights.add(lineMaxHeight)
+                lineHeights.add(lineHeightMax)
                 parentNeededWidth += lineWidthUsed + mHorizontalSpacing
-                parentNeededHeight += lineMaxHeight + mVerticalSpacing
+                parentNeededHeight += lineHeightMax + mVerticalSpacing
             }
         }
 

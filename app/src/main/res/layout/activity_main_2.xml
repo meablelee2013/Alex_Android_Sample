@@ -19,7 +19,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
-        <com.oriente.aptsample.customview.FlowLayout
+        <com.oriente.aptsample.flow2.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_button_circular"
                 android:text="图书勋章日" />
-        </com.oriente.aptsample.customview.FlowLayout>
+        </com.oriente.aptsample.flow2.FlowLayout>
 
         <TextView
             android:layout_width="wrap_content"

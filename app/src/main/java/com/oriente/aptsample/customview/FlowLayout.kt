@@ -137,6 +137,7 @@ class FlowLayout : ViewGroup {
                 childView.layout(left, top, right, bottom)
                 curL = right + mHorizontalSpacing
             }
+            //一行结束之后换行，left就会重新来
             curT += lineHeight + mVerticalSpacing
             curL = paddingLeft
         }

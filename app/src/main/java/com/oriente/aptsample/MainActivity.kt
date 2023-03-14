@@ -1,60 +1,33 @@
 package com.oriente.aptsample
 
-import android.app.ActivityManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.oriente.aptsample.theme.MyApplicationTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        Log.d("alex","MainActivity.onCreate")
-        title = "MainActivity"
-        findViewById<TextView>(R.id.checkHandler).setOnClickListener {
-            Log.d("alex","running process size = ${getRunningAppProcessInfoSize()}")
-            startActivity(Intent(this@MainActivity,SecondActivity::class.java))
+        setContent {
+            MyApplicationTheme {
+                var mainViewModel = viewModel<MainViewModel>()
+                val number = mainViewModel.countDownFlow.collectAsState(initial = 10)
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Text(
+                        text = number.value.toString(), fontSize = 30.sp, modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("alex","MainActivity.onStart")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("alex","MainActivity.onRestart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("alex","MainActivity.onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("alex","MainActivity.onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("alex","MainActivity.onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("alex","MainActivity.onDestroy")
-    }
-
-    private fun getRunningAppProcessInfoSize(): Int {
-        val systemService: ActivityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        return systemService.runningAppProcesses.size
-    }
-
 }

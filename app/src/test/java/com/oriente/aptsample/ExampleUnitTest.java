@@ -3,7 +3,6 @@ package com.oriente.aptsample;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.openjdk.jol.info.ClassLayout;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -29,18 +28,18 @@ public class ExampleUnitTest {
 
     @Test
     public void testSoftReference() {
-        List<SoftReference<byte[]>> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            SoftReference<byte[]> ref = new SoftReference<>(new byte[_4MB]);
-            System.out.println(ref.get());
-            list.add(ref);
-            System.out.println(list.size());
-        }
-
-        System.out.println("循环结束: " + list.size());
-        for (SoftReference<byte[]> ref : list) {
-            System.out.println(ref.get());
-        }
+//        List<SoftReference<byte[]>> list = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            SoftReference<byte[]> ref = new SoftReference<>(new byte[_4MB]);
+//            System.out.println(ref.get());
+//            list.add(ref);
+//            System.out.println(list.size());
+//        }
+//
+//        System.out.println("循环结束: " + list.size());
+//        for (SoftReference<byte[]> ref : list) {
+//            System.out.println(ref.get());
+//        }
     }
 
     //查看对象占用字节数
@@ -87,8 +86,8 @@ public class ExampleUnitTest {
      */
     @Test
     public void testObject() {
-        MyObject o = new MyObject();
-        String s = ClassLayout.parseInstance(o).toPrintable();
-        System.out.println(s);
+//        MyObject o = new MyObject();
+//        String s = ClassLayout.parseInstance(o).toPrintable();
+//        System.out.println(s);
     }
 }

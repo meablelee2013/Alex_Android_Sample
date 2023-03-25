@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.oriente.aptsample.fps.FpsMonitor
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.checkHandler).setOnClickListener {
             Log.d("alex","running process size = ${getRunningAppProcessInfoSize()}")
             startActivity(Intent(this@MainActivity,SecondActivity::class.java))
+        }
+
+        FpsMonitor.startMonitor {
+
         }
     }
 

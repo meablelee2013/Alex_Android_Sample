@@ -1,0 +1,1 @@
+/Users/lizhigang/myproject/Alex_Android_Sample/nativelib/build/intermediates/cxx/Debug/243b2k2j/obj/x86

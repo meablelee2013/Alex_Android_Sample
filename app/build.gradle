@@ -18,13 +18,13 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "boolean", "active", "false"
+
             debuggable true
         }
 
         release {
             minifyEnabled true
-            buildConfigField "boolean", "active", "false"
+
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -33,13 +33,13 @@ android {
             initWith(release)
             matchingFallbacks = ['release', 'debug']
             debuggable true
-            buildConfigField "boolean", "active", "true"
+
         }
         pre {
             initWith(release)
             matchingFallbacks = ['release', 'debug']
             debuggable false
-            buildConfigField "boolean", "active", "true"
+
         }
     }
     compileOptions {
@@ -61,7 +61,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
 
-    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.core:core-ktx:1.10.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

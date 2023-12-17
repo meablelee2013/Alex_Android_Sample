@@ -1,0 +1,1 @@
+/Users/lizhigang/myproject/Alex_Android_Sample/nativelib/build/intermediates/cxx/RelWithDebInfo/1m5l71n3/obj/x86

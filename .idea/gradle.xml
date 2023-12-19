@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/borrow" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/payment" />
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>

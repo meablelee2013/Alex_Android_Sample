@@ -3,7 +3,10 @@ package com.oriente.aptsample
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.example.common.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,11 +25,19 @@ class MainActivity : AppCompatActivity() {
 //                userAction.getUserName()
 //                userAction.setUserName("aaa")
 //            }
-            var borrowAction = AutoServiceUtil2.getInstance().getService(BorrowAction::class.java)
-            borrowAction.borrow()
-            borrowAction.verifyBorrow()
+//            var borrowAction = AutoServiceUtil2.getInstance().getService(BorrowAction::class.java)
+//            borrowAction.borrow()
+//            borrowAction.verifyBorrow()
 
-            startActivity(Intent(this, SecondActivity::class.java))
+//            startActivity(Intent(this, SecondActivity::class.java))
+            val liveData = MutableLiveData<String>()
+
+            liveData.observe(this, object : Observer<String> {
+                override fun onChanged(value: String) {
+                    Toast.makeText(this@MainActivity, value, Toast.LENGTH_LONG).show()
+                }
+            })
+            liveData.value = "我来自哈哈"
 
 
         }

@@ -1,11 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+//    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.example.borrow'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
@@ -40,6 +41,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation project(":common")
-    implementation 'com.google.auto.service:auto-service:1.0.1'
-    annotationProcessor 'com.google.auto.service:auto-service:1.0.1'
+    implementation 'com.google.auto.service:auto-service:1.1.1'
+    annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
 }

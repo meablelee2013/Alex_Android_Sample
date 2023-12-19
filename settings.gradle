@@ -27,3 +27,5 @@ include ':app'
 include ':common'
 include ':user'
 include ':borrow'
+
+include ':payment'

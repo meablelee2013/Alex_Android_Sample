@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.oriente.aptsample.databinding.ActivityMainBinding
 import com.oriente.aptsample.viewmodel.UserModel
@@ -16,13 +17,17 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val userModel by viewModels<UserModel>()
+//    private val userModel by viewModels<UserModel> {ViewModelProvider.AndroidViewModelFactory(application)  }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+       var userModel =
+            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
+                UserModel::class.java
+            )
         binding.userModel = userModel
         binding.lifecycleOwner = this
 

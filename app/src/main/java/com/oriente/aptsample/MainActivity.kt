@@ -1,45 +1,37 @@
 package com.oriente.aptsample
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import com.example.common.*
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import com.oriente.aptsample.databinding.ActivityMainBinding
+import com.oriente.aptsample.viewmodel.UserModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+/**
+ * LiveData + ViewModel + DataBinding + CoroutineScope
+ */
 
 class MainActivity : AppCompatActivity() {
 
+    private val userModel by viewModels<UserModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        findViewById<TextView>(R.id.text_dashboard).setOnClickListener {
-//            val service = AutoServiceUtil.getService("borrowAction")
-//            if (service != null && service is BorrowAction) {
-//                service.borrow()
-//                service.verifyBorrow()
-//            }
-//            val userAction = AutoServiceUtil.getService(UserAction::class.java)
-//            if (userAction != null && userAction is UserAction) {
-//                userAction.getUserName()
-//                userAction.setUserName("aaa")
-//            }
-//            var borrowAction = AutoServiceUtil2.getInstance().getService(BorrowAction::class.java)
-//            borrowAction.borrow()
-//            borrowAction.verifyBorrow()
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-//            startActivity(Intent(this, SecondActivity::class.java))
-            val liveData = MutableLiveData<String>()
+        binding.userModel = userModel
+        binding.lifecycleOwner = this
 
-            liveData.observe(this, object : Observer<String> {
-                override fun onChanged(value: String) {
-                    Toast.makeText(this@MainActivity, value, Toast.LENGTH_LONG).show()
-                }
-            })
-            liveData.value = "我来自哈哈"
-
-
+        lifecycleScope.launch {
+            repeat(10) {
+                delay(2000)
+                userModel.age.postValue(userModel.age.value?.plus(100) ?: 10)
+                userModel.name.postValue(userModel.name.value + "alex")
+            }
         }
     }
 }

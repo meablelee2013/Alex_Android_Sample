@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#00BCD4"
-        android:text="click"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+    <data>
 
-    <TextView
-        android:id="@+id/text2"
+        <variable
+            name="userModel"
+            type="com.oriente.aptsample.viewmodel.UserModel" />
+
+    </data>
+    <!--上面的是给dataBinding使用的，下面的是给android的view体系使用的-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- @= view - > model -->
+        <TextView
+            android:id="@+id/text_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#00BCD4"
+            android:text="@{userModel.name}"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:text="@{userModel.age.toString()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

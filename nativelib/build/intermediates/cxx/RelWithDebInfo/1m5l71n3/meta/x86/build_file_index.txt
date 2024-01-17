@@ -1,1 +1,0 @@
-/Users/lizhigang/myproject/Alex_Android_Sample/nativelib/src/main/cpp/CMakeLists.txt

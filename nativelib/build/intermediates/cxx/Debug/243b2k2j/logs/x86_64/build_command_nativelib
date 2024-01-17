@@ -1,4 +1,0 @@
-/Users/lizhigang/sdk/android-sdk-macosx/cmake/3.18.1/bin/ninja \
-  -C \
-  /Users/lizhigang/myproject/Alex_Android_Sample/nativelib/.cxx/Debug/243b2k2j/x86_64 \
-  nativelib

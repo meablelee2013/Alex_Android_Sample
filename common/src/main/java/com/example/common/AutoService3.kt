@@ -3,19 +3,18 @@ package com.example.common
 import android.os.Build
 import android.util.Log
 import java.lang.ref.SoftReference
-import java.util.*
+import java.util.ServiceLoader
 
-/**
- * 暂时不可用
- */
 object AutoServiceUtil3 {
 
-    lateinit var serviceLoader: ServiceLoader<BaseAction>
-    val serviceCache: MutableMap<String, SoftReference<BaseAction>> = mutableMapOf()
+    private var serviceLoader: ServiceLoader<BaseAction>? = null
+    private val serviceCache = HashMap<String, SoftReference<BaseAction>>()
 
-    inline fun <reified T : BaseAction> getService(serviceName: String, clazz: Class<T>): T {
+    init {
         checkInitialized()
+    }
 
+    fun <T : BaseAction> getService(serviceName: String, clazz: Class<T>): T {
         // Check the cache first
         val cachedServiceRef = serviceCache[serviceName]
         val cachedService = cachedServiceRef?.get() as? T
@@ -24,11 +23,11 @@ object AutoServiceUtil3 {
         }
 
         // If not in the cache or the reference has been cleared, load it from ServiceLoader
-        serviceLoader.forEach {
-            if (clazz.isAssignableFrom(it.javaClass) && it is T && it.name() == serviceName) {
+        for (action in serviceLoader!!) {
+            if (clazz.isAssignableFrom(action.javaClass) && clazz.isInstance(action) && action.name() == serviceName) {
                 // Cache the service using a SoftReference
-                serviceCache[serviceName] = SoftReference(it)
-                return it
+                serviceCache[serviceName] = SoftReference(action)
+                return action as T
             }
         }
 
@@ -37,11 +36,9 @@ object AutoServiceUtil3 {
         throw IllegalStateException("Service not found: $serviceName")
     }
 
-    inline fun <reified T : BaseAction> getService(clazz: Class<T>?): T {
-        checkInitialized()
-
+    fun <T : BaseAction> getService(clazz: Class<T>): T {
         // Check the cache first
-        val serviceName = clazz?.name ?: ""
+        val serviceName = clazz.name
         val cachedServiceRef = serviceCache[serviceName]
         val cachedService = cachedServiceRef?.get() as? T
         if (cachedService != null) {
@@ -50,13 +47,12 @@ object AutoServiceUtil3 {
 
         // If not in the cache, load it from ServiceLoader
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val iterator = serviceLoader.iterator()
-            while (iterator.hasNext()) {
-                val next = iterator.next()
-                if (clazz != null && clazz.isAssignableFrom(next.javaClass) && next is T) {
+            val loader = ServiceLoader.load(BaseAction::class.java)
+            for (action in loader) {
+                if (clazz.isAssignableFrom(action.javaClass) && clazz.isInstance(action)) {
                     // Cache the service using a SoftReference
-                    serviceCache[serviceName] = SoftReference(next)
-                    return next
+                    serviceCache[serviceName] = SoftReference(action)
+                    return action as T
                 }
             }
         }
@@ -66,8 +62,8 @@ object AutoServiceUtil3 {
         throw IllegalStateException("Service not found: $serviceName")
     }
 
-    fun checkInitialized() {
-        if (!this::serviceLoader.isInitialized) {
+    private fun checkInitialized() {
+        if (serviceLoader == null || !serviceLoader!!.iterator().hasNext()) {
             serviceLoader = ServiceLoader.load(BaseAction::class.java)
         }
     }

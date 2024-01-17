@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-//    id 'kotlin-kapt'
+    id 'kotlin-kapt'
 //    id 'kotlin-android'
 }
 
@@ -44,6 +44,6 @@ dependencies {
 
     implementation project(":common")
 
-    implementation 'com.google.auto.service:auto-service:1.1.1'
-    annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
+    api 'com.google.auto.service:auto-service:1.1.1'
+    kapt 'com.google.auto.service:auto-service:1.1.1'
 }

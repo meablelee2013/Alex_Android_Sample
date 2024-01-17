@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity() {
         binding.userModel = userModel
         binding.lifecycleOwner = this
 
-        lifecycleScope.launch {
-            repeat(10) {
-                delay(2000)
-                userModel.age.postValue(userModel.age.value?.plus(100) ?: 10)
-                userModel.name.postValue(userModel.name.value + "alex")
-            }
-        }
+//        lifecycleScope.launch {
+//            repeat(10) {
+//                delay(2000)
+//                userModel.age.postValue(userModel.age.value?.plus(100) ?: 10)
+//                userModel.name.postValue(userModel.name.value + "alex")
+//            }
+//        }
     }
 }

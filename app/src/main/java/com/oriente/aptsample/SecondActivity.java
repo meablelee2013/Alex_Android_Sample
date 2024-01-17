@@ -1,7 +1,6 @@
 package com.oriente.aptsample;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +18,8 @@ public class SecondActivity extends AppCompatActivity {
             BorrowAction service = AutoServiceUtil2.getInstance().getService(BorrowAction.class);
             service.borrow();
             service.verifyBorrow();
+
+
         });
     }
 }
